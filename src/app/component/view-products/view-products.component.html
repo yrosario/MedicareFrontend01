@@ -25,11 +25,7 @@
                 <div class="flex-container product-grid" id="product-grid" *ngFor="let product of products">
                     
                     <div class="flex-item" id="flex-item">
-                        <div class="prod-img" id="prod-img"><img [src]="product.imgUrl" [alt]="product.name"></div>
-                        <div class="prod-title" id="prod-title">{{ product.name }}</div>
-                        <div class="prod-price" id="prod-price">{{ product.price }}</div>
-                        <button class="prod-cart-btn" id="prod-cart-btn"> Add </button>
-                        <button class="prod-buy-btbn" id="product-buy-btn">Buy</button>
+                        <app-product-item [product]="product"></app-product-item>
                           
                     </div>
                 </div>

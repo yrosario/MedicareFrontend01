@@ -11,6 +11,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { NavbarComponent } from './component/navigation/navbar/navbar.component';
 import { FooterComponent } from './component/navigation/footer/footer.component';
 import { ViewProductsComponent } from './component/view-products/view-products.component';
+import { ProductItemComponent } from './component/view-products/product-item/product-item/product-item.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ViewProductsComponent } from './component/view-products/view-products.c
     RegisterComponent,
     NavbarComponent,
     FooterComponent,
-    ViewProductsComponent
+    ViewProductsComponent,
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,
