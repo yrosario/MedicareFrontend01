@@ -8,22 +8,31 @@
     </div>
 
     <!-- Slider -->
-    <div class="slider-div" id="slider-div"></div>
+    <div class="slider-div" id="slider-div">
+        <img src="https://via.placeholder.com/450" alt="slider">
+    </div>
 
-    <!-- Product gallery -->
-    <div class="product-view" id="product-view">
-        <h1 class="product-view-title" id="product-view-title">
-            Top Selling items
-        </h1>
+    <!-- split product category and product view -->
+    <div class="view-splitter" id="view-splitter">
 
-        <div class="flex-container product-grid" id="product-grid">
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-        </div>
+        
+            <!-- Product gallery -->
+            <div class="product-view" id="product-view">
+                <h1 class="product-view-title" id="product-view-title">
+                    Top Selling items
+                </h1>
+        
+                <div class="flex-container product-grid" id="product-grid" *ngFor="let product of products">
+                    
+                    <div class="flex-item" id="flex-item">
+                        <div class="prod-img" id="prod-img"><img [src]="product.imgUrl" [alt]="product.name"></div>
+                        <div class="prod-title" id="prod-title">{{ product.name }}</div>
+                        <div class="prod-price" id="prod-price">{{ product.price }}</div>
+                        <button class="prod-cart-btn" id="prod-cart-btn"> Add </button>
+                        <button class="prod-buy-btbn" id="product-buy-btn">Buy</button>
+                          
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
