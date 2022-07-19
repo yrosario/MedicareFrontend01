@@ -14,7 +14,14 @@
 
     <!-- split product category and product view -->
     <div class="view-splitter" id="view-splitter">
-
+            <!-- Category List -->
+            <div class="category-list" id="category-list" *ngFor="let category of categories">
+                
+                <ul> 
+                    <li><a href="#">{{category.name}}</a></li>
+                </ul>
+                
+            </div>
         
             <!-- Product gallery -->
             <div class="product-view" id="product-view">
