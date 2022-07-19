@@ -1,0 +1,38 @@
+<!-- Login component -->
+<div class="login-main" id = "login-main">
+
+    <!-- title -->
+    <h1 class="login-title" id="login-title">Login</h1>
+
+    <!-- Login div -->
+    <div class="login-block" id="login-block">
+
+        <label for="invalid-login" *ngIf="invalidLogin">Invalid Login</label>
+
+        <!-- login username  -->
+        <label for="username" class="login-label" id="login-l" >
+            username
+         </label>
+        <div class="login-username" id="login-username">
+            <input type="text" class="login-username-input" id="login-username-input" [(ngModel)]="username">
+        </div>
+
+
+        <!-- login password -->
+        <label for="password" class="login-label" id="login-l" >
+            password
+         </label>
+        <div class="login-password" id="login-password">
+            <input type="text" class="login-password-input" id="login-password-input" [(ngModel)] = "password">
+        </div>
+
+        <!-- Login and register button -->
+        <div class="login-btn-div" id="login-btn-div">
+            <button class="login-btn" id="login-btn" (click)="login()">Login</button>
+            <button class="register-btn" id="register-btn" (click)="routeToRegister()">register</button>
+
+        </div>
+
+    </div>
+
+</div>

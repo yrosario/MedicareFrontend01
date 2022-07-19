@@ -1,0 +1,38 @@
+<!-- Registration form -->
+
+<div class="reg-form-main" id="reg-form-main">
+
+    <!-- Page title -->
+    <Label for="reg-title" class="reg-title" id="reg-title"><H1>Register New User</H1> </Label>
+
+    <!-- Registration form element -->
+    <form (ngSubmit)="registerUser(user)" #user="ngForm">
+        <label for="firstname">firstname</label>
+        <input type="text" name="firstname-input" id="firstname-input" name="firstname" ngModel required>
+        <br>
+
+        <label for="firstname">lastname</label>
+        <input type="text" name="lastname-input" id="lastname-input" name="lastname" ngModel required>
+        <br>
+
+        <label for="email">email</label>
+        <input type="email" name="email-input" id="email-input" name="email" ngModel required>
+        <br>
+
+        <label for="username">username</label>
+        <input type="text" name="username-input" id="username-input" name="username" ngModel required>
+        <br>
+
+        <label for="password">password</label>
+        <input type="password" name="password-input" id="password-input" name="password" ngModel required>
+        <br>
+
+        <label for="">retype password</label>
+        <input type="password" name="retyPassword-input" id="retyPassowrd-input" ngModle required>
+        <br>
+
+        <button type="submit" class="btn-submit" id="btsumit">Register</button>
+    </form>
+
+
+</div>
