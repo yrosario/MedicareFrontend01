@@ -10,6 +10,7 @@ import { LogoffComponent } from './component/logoff/logoff/logoff.component';
 import { RegisterComponent } from './component/register/register.component';
 import { NavbarComponent } from './component/navigation/navbar/navbar.component';
 import { FooterComponent } from './component/navigation/footer/footer.component';
+import { ViewProductsComponent } from './component/view-products/view-products.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FooterComponent } from './component/navigation/footer/footer.component'
     LogoffComponent,
     RegisterComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ViewProductsComponent
   ],
   imports: [
     BrowserModule,
