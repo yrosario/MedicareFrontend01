@@ -8,7 +8,8 @@ import { ViewProductsComponent } from './component/view-products/view-products.c
 const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'shop', component:ViewProductsComponent}
+  {path: 'shop', component:ViewProductsComponent},
+  {path: 'shop/product/:id', component: ProductItemComponent}
 ];
 
 @NgModule({

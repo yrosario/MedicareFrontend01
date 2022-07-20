@@ -14,6 +14,7 @@ import { ViewProductsComponent } from './component/view-products/view-products.c
 import { ProductItemComponent } from './component/view-products/product-item/product-item/product-item.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
