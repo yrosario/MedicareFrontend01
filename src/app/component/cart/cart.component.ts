@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartEntity } from 'src/app/entity/cart/cart-entity';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { CartService } from 'src/app/service/cart.service';
+import { MessengerService } from 'src/app/service/shared/messenger.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,12 +14,28 @@ export class CartComponent implements OnInit {
   cart = new CartEntity();
   total = 0;
 
-  constructor(private cartService:CartService) { }
+  constructor(private cartService:CartService, private msg:MessengerService) { }
 
   ngOnInit(): void {
+    
     this.cart = this.cartService.getCart();
 
+
+    this.msg.getMsg().subscribe((product:ProductEntity) => {
+      this.cart.products.push({
+        name:product.name,
+        qty:1,
+        price:product.price,
+        productId:product.id,
+        category:product.category.name,
+        id:this.cart.products.length
+
+      })
+
+      
+    })
     this.sumTotal();
+    this.cartService.setCart(this.cart);
 
   }
 

@@ -2,7 +2,7 @@
     <div class="prod-img" id="prod-img"><a [routerLink]="['/shop/product',product.id]"><img [src]="product.imgUrl" [alt]="product.name"> </a></div>
     <div class="prod-title" id="prod-title">{{ product.name }}</div>
     <div class="prod-price" id="prod-price">{{ product.price }}</div>
-    <button class="prod-cart-btn" id="prod-cart-btn"> Add </button>
+    <button class="prod-cart-btn" id="prod-cart-btn" (click)="addToCart()"> Add </button>
     <button class="prod-buy-btbn" id="product-buy-btn">Buy</button>
 </div>
 
