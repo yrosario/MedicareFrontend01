@@ -13,6 +13,7 @@ import { FooterComponent } from './component/navigation/footer/footer.component'
 import { ViewProductsComponent } from './component/view-products/view-products.component';
 import { ProductItemComponent } from './component/view-products/product-item/product-item/product-item.component';
 import { CartComponent } from './component/cart/cart.component';
+import { BillSummaryComponent } from './component/cart/bill-summary/bill-summary.component';
 
 
 
@@ -26,7 +27,8 @@ import { CartComponent } from './component/cart/cart.component';
     FooterComponent,
     ViewProductsComponent,
     ProductItemComponent,
-    CartComponent
+    CartComponent,
+    BillSummaryComponent
   ],
   imports: [
     BrowserModule,
