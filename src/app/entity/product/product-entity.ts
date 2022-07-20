@@ -3,7 +3,7 @@ import { CategoryEntity } from "../category/category-entity";
 export class ProductEntity {
     id:number;
     name:string;
-    category;string;
+    category:CategoryEntity;
     price:number;
     qty:number;
     imgUrl:string;

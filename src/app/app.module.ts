@@ -12,6 +12,7 @@ import { NavbarComponent } from './component/navigation/navbar/navbar.component'
 import { FooterComponent } from './component/navigation/footer/footer.component';
 import { ViewProductsComponent } from './component/view-products/view-products.component';
 import { ProductItemComponent } from './component/view-products/product-item/product-item/product-item.component';
+import { CartComponent } from './component/cart/cart.component';
 
 
 
@@ -24,7 +25,8 @@ import { ProductItemComponent } from './component/view-products/product-item/pro
     NavbarComponent,
     FooterComponent,
     ViewProductsComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
