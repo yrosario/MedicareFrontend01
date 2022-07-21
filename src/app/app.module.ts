@@ -15,6 +15,8 @@ import { ProductItemComponent } from './component/view-products/product-item/pro
 import { CartComponent } from './component/cart/cart.component';
 import { BillSummaryComponent } from './component/cart/bill-summary/bill-summary.component';
 import { AdminComponent } from './component/admin/admin.component';
+import { ManageUserComponent } from './component/admin/manage-user/manage-user.component';
+import { EditUserComponent } from './component/admin/manage-user/edit-user/edit-user.component';
 
 
 
@@ -30,7 +32,9 @@ import { AdminComponent } from './component/admin/admin.component';
     ProductItemComponent,
     CartComponent,
     BillSummaryComponent,
-    AdminComponent
+    AdminComponent,
+    ManageUserComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
