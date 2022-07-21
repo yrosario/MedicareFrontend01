@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartEntity } from 'src/app/entity/cart/cart-entity';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { CartService } from 'src/app/service/cart.service';
@@ -14,7 +15,8 @@ export class CartComponent implements OnInit {
   cart = new CartEntity();
   total = 0;
 
-  constructor(private cartService:CartService, private msg:MessengerService) { }
+  constructor(private cartService:CartService, private msg:MessengerService,
+        private router:Router) { }
 
   ngOnInit(): void {
     
@@ -81,6 +83,10 @@ export class CartComponent implements OnInit {
     }
 
     this.sumTotal();
+  }
+
+  billCheckout(){
+    this.router.navigate(["/cart/bill-summary"]);
   }
 
 }
