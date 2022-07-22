@@ -9,10 +9,10 @@ export class UserService {
 
   user:UserEntity  = new UserEntity;
   users = [{id:1, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
-           {id:1, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
-           {id:1, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
-           {id:1, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
-           {id:1, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"}];
+           {id:2, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
+           {id:3, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
+           {id:4, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"},
+           {id:5, firstname:"Mike", lastname:"Jordan", email:"mjordan@gamil.com", username:"mjordan", password:"jordan",role:"user"}];
 
   constructor() {
     this.user.id = 1;
@@ -62,6 +62,27 @@ export class UserService {
     for(let i = 0; i < this.users.length; i++){
       if(this.users[i].id === id){
         this.users.splice(i,1);
+        return;
+      }
+    }
+  }
+
+  findUserById(id:number){
+    for(let user of this.users){
+      if(user.id === id){
+        return user;
+      }
+    }
+
+    return null;
+  }
+
+  save(user){
+    
+    for(let i = 0; i < this.users.length; i++){
+      if(user.id === this.users[i].id)
+      {
+        this.users[i] = user;
         return;
       }
     }

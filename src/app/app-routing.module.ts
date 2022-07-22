@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'cart/bill-summary', component: BillSummaryComponent},
   {path: 'admin', component:AdminComponent},
   {path: 'admin/manage-users', component:ManageUserComponent},
-  {path: 'admin/manage-users/edit-user', component:EditUserComponent}
+  {path: 'admin/manage-users/edit-user/:id', component:EditUserComponent}
 
 ];
 

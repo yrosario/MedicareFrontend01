@@ -6,7 +6,7 @@
     <Label for="reg-title" class="reg-title" id="reg-title"><H1>Register New User</H1> </Label>
 
     <!-- Registration form element -->
-    <form (ngSubmit)="registerUser(user)" #user="ngForm">
+    <form (ngSubmit)="registerUser(userForm)" #userForm="ngForm">
         <label for="firstname">firstname</label>
         <input type="text" name="firstname-input" id="firstname-input" name="firstname" ngModel required>
         <br>
