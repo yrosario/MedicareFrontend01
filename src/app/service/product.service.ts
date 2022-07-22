@@ -22,4 +22,17 @@ export class ProductService {
    getProducts(){
       return this.products;
    }
+
+   deleteProductById(id:number){
+    for(let i = 0; i < this.products.length; i++){
+      if(id === this.products[i].id){
+        this.products.splice(i,1);
+        console.log(this.products);
+        break;
+      }
+    }
+
+   }
+
+   
 }
