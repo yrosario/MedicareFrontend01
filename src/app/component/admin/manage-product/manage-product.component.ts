@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class ManageProductComponent implements OnInit {
 
-  products:[ProductEntity];
+  products:ProductEntity[]= [];
   
   constructor(private productService:ProductService, private router:Router ) { }
 
@@ -28,13 +28,17 @@ export class ManageProductComponent implements OnInit {
   }
 
   deleteProductById(id:number){
-    
-    this.productService.deleteProductById(id);
-    console.log(this.products);
-    this.getProducts();
+    this.productService.deleteProductById(id).subscribe(
+      res => {
+        console.log("Delete response",JSON.stringify(res));
+
+        //Refresh product list
+        this.getProducts();
+      }
+    )
   }
 
-  navigateProductEdit(id?){
+  navigateProductEdit(id?:number){
     this.router.navigate([`admin/manage-products/edit-product/${id}`]);
   }
 

@@ -26,12 +26,12 @@ export class ProductService {
 
   /* Deletes a specific product base on id from http://localhost:8080/api/v1/product/:id */
   deleteProductById(id:number){
-    this.httpClient.delete(API_URL+PRODUCT+"/"+id);
+    return this.httpClient.delete(API_URL+PRODUCT+"/"+id, {observe: "response", responseType:"text"});
   }
 
   /* Post a new product to REST api */
   saveProduct(product:ProductEntity){
-    this.httpClient.post(API_URL+PRODUCT,product);
+    return this.httpClient.post(API_URL+PRODUCT,product);
   }
 
   /* Put a product to REST api */
