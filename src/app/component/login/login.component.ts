@@ -16,12 +16,17 @@ export class LoginComponent implements OnInit {
   constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
+    let isLogin = this.userService.isUserLoggedIn();
+    if(isLogin){
+      this.redirectLoggedInUser();
+    }
   }
 
   login(){
     if(this.userService.authenticate(this.username,this.password)){
-      sessionStorage.setItem("loggedIn", "true");
+      sessionStorage.setItem("loggedIn", "1");
       this.invalidLogin = false;
+      this.router.navigate(["/shop"]);
     }else{
       this.invalidLogin = true;
     }
@@ -29,6 +34,10 @@ export class LoginComponent implements OnInit {
 
   routeToRegister(){
     this.router.navigate(['register']);
+  }
+
+  redirectLoggedInUser(){
+    this.router.navigate(["/shop"]);
   }
   
 }

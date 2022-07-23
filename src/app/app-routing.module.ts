@@ -8,6 +8,7 @@ import { ManageUserComponent } from './component/admin/manage-user/manage-user.c
 import { BillSummaryComponent } from './component/cart/bill-summary/bill-summary.component';
 import { CartComponent } from './component/cart/cart.component';
 import { LoginComponent } from './component/login/login.component';
+import { LogoffComponent } from './component/logoff/logoff/logoff.component';
 import { RegisterComponent } from './component/register/register.component';
 import { ProductItemComponent } from './component/view-products/product-item/product-item/product-item.component';
 import { ViewProductsComponent } from './component/view-products/view-products.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'admin/manage-users/edit-user/:id', component:EditUserComponent},
   {path: 'admin/manage-products', component:ManageProductComponent},
   {path: 'admin/manage-products/edit-product/:id', component:EditProductComponent},
-  {path: 'admin/manage-products/edit-product', component:EditProductComponent}
+  {path: 'admin/manage-products/edit-product', component:EditProductComponent},
+  {path: 'logoff', component:LogoffComponent}
 
 ];
 

@@ -87,4 +87,15 @@ export class UserService {
       }
     }
   }
+
+  isUserLoggedIn(){
+   
+    let isLogin = +sessionStorage.getItem("loggedIn");
+ 
+    if(isLogin === 1){
+     return true;
+    }else{
+     return false;
+    }
+   }
 }
