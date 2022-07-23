@@ -16,11 +16,29 @@ export class CategoryService {
 
   constructor(private httpClient:HttpClient) { }
 
+  /* Retrieves all categories from REST server*/
   getCategories(){
     return this.httpClient.get<CategoryEntity[]>(API_URL+CATEGORY);
   }
 
-  // getCategories(){
-  //   return this.catogries;
-  // }
+  /* Retrieve a specific category from REST server */
+  getCategoryById(id:number){
+    return this.httpClient.get<CategoryEntity>(API_URL+CATEGORY+id);
+  }
+
+  /* Post category to REST api */
+  saveCategory(category:CategoryEntity){
+    this.httpClient.post(API_URL+category, {observe: 'response', responseType: 'json'});
+  }
+
+  /*Put category to REST api */
+  updateCategory(category:CategoryEntity){
+    this.httpClient.put(API_URL+CATEGORY, {observe: 'response', responseType: "json"});
+  }
+
+  /*Delete category base on id from REST api*/
+  deleteCategoryById(id:number){
+    return this.httpClient.delete(API_URL+CATEGORY+`/${id}`, {observe: 'response', responseType: "json"});
+  }
+
 }
