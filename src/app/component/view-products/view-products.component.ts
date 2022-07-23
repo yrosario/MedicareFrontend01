@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryEntity } from 'src/app/entity/category/category-entity';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/service/product.service';
 export class ViewProductsComponent implements OnInit {
 
   products = [];
-  categories = [];
+  categories:CategoryEntity[] = [];
 
   constructor(private productService:ProductService, private categoryService:CategoryService) { }
 
@@ -28,6 +29,10 @@ export class ViewProductsComponent implements OnInit {
   }
 
   getCategories(){
-    this.categories = this.categoryService.getCategories();
+    this.categoryService.getCategories().subscribe(
+      res =>{
+        this.categories = res;
+      }
+    );
   }
 }

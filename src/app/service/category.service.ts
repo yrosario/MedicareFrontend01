@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { API_URL, CATEGORY } from '../contants';
 import { CategoryEntity } from '../entity/category/category-entity';
 
 @Injectable({
@@ -12,9 +14,13 @@ export class CategoryService {
               new CategoryEntity(4,"Nasal Congestion Relief"),
               new CategoryEntity(5,"Antibiotics")]
 
-  constructor() { }
+  constructor(private httpClient:HttpClient) { }
 
   getCategories(){
-    return this.catogries;
+    return this.httpClient.get<CategoryEntity[]>(API_URL+CATEGORY);
   }
+
+  // getCategories(){
+  //   return this.catogries;
+  // }
 }

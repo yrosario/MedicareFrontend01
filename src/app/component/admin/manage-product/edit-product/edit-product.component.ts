@@ -14,7 +14,7 @@ export class EditProductComponent implements OnInit {
 
   product:{pid:number,name:string,category:CategoryEntity,qty:number,price:number, imgUrl:string}=
           {pid:0, name:"name",category:null,qty:-1,price:-1,imgUrl:""};
-  categories = [];
+  categories:CategoryEntity[];
 
   constructor(private productService:ProductService, private categoryService:CategoryService, private activatedRoute:ActivatedRoute) { }
 
@@ -28,7 +28,16 @@ export class EditProductComponent implements OnInit {
         
     }
 
-    this.categories = this.categoryService.getCategories();
+    this.categoryService.getCategories();
+  }
+
+  /*Retrieve all categories from server */
+  getCategories(){
+    this.categoryService.getCategories().subscribe(
+      res =>{
+        this.categories = res;
+      }
+    );
   }
 
   editProduct(form:NgForm){
