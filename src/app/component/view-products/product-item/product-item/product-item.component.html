@@ -3,7 +3,7 @@
     <div class="prod-title" id="prod-title">{{ product.name }}</div>
     <div class="prod-price" id="prod-price">{{ product.price }}</div>
     <button class="prod-cart-btn" id="prod-cart-btn" (click)="addToCart()"> Add </button>
-    <button class="prod-buy-btbn" id="product-buy-btn">Buy</button>
+    <button class="prod-buy-btbn" id="product-buy-btn" (click)="goToCart()">Buy</button>
 </div>
 
  <p class="bad-msg" id="bad-msg" *ngIf="product == null">Product does not exist!</p>

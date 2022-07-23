@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { ProductService } from 'src/app/service/product.service';
 import { MessengerService } from 'src/app/service/shared/messenger.service';
+import { UserService } from 'src/app/service/user.service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class ProductItemComponent implements OnInit {
 
   @Input() product:ProductEntity;
 
-  constructor(private activedRoute:ActivatedRoute, private productService:ProductService,private msg:MessengerService) { }
+  constructor(private activedRoute:ActivatedRoute, private productService:ProductService,private msg:MessengerService,
+              private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
    let paramValue = this.activedRoute.snapshot.paramMap.get("id");
@@ -37,6 +39,27 @@ export class ProductItemComponent implements OnInit {
   }
 
   addToCart(){
-    this.msg.sendMsg(this.product);
+
+    let isLogin = this.userService.isUserLoggedIn();
+    if(!isLogin){
+      this.redirectLogin();
+    }else{
+      this.msg.sendMsg(this.product);
+    }
   }
+
+  goToCart(){
+    let isLogin = this.userService.isUserLoggedIn();
+    if(!isLogin){
+      this.redirectLogin();
+    }else{
+      this.router.navigate(["/cart"]);
+    }
+  }
+
+  redirectLogin(){
+    this.router.navigate(["login"]);
+  }
+
+
 }
