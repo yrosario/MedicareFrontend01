@@ -31,8 +31,25 @@ export class ProductService {
         break;
       }
     }
-
    }
 
+   findProductById(id){
+    for(let product of this.products){
+      if(product.id === id){
+        return product;     
+       }
+    }
+    return null;
+   }
+
+
+   save(product){
+    for(let i = 0; i < this.products.length; i++){
+      if(product.id === this.products[i].id)
+      {
+        this.products[i] = product;
+      }
+    }
+   }
    
 }

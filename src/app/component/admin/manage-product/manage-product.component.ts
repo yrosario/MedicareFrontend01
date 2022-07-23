@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -9,11 +11,13 @@ import { ProductService } from 'src/app/service/product.service';
 export class ManageProductComponent implements OnInit {
 
   products = [];
-  constructor(private productService:ProductService) { }
+  c
+  constructor(private productService:ProductService, private router:Router ) { }
 
   ngOnInit(): void {
 
     this.products = this.productService.getProducts();
+    
   }
 
   deleteProductById(id:number){
@@ -21,6 +25,10 @@ export class ManageProductComponent implements OnInit {
     this.productService.deleteProductById(id);
     console.log(this.products);
     this.products = this.productService.getProducts()
+  }
+
+  navigateProductEdit(id){
+    this.router.navigate([`admin/manage-products/edit-product/${id}`]);
   }
 
 }

@@ -18,6 +18,7 @@ import { AdminComponent } from './component/admin/admin.component';
 import { ManageUserComponent } from './component/admin/manage-user/manage-user.component';
 import { EditUserComponent } from './component/admin/manage-user/edit-user/edit-user.component';
 import { ManageProductComponent } from './component/admin/manage-product/manage-product.component';
+import { EditProductComponent } from './component/admin/manage-product/edit-product/edit-product.component';
 
 
 
@@ -37,7 +38,8 @@ import { ManageProductComponent } from './component/admin/manage-product/manage-
     AdminComponent,
     ManageUserComponent,
     EditUserComponent,
-    ManageProductComponent
+    ManageProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
