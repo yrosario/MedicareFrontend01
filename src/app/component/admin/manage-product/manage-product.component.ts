@@ -27,7 +27,7 @@ export class ManageProductComponent implements OnInit {
     this.products = this.productService.getProducts()
   }
 
-  navigateProductEdit(id){
+  navigateProductEdit(id?){
     this.router.navigate([`admin/manage-products/edit-product/${id}`]);
   }
 

@@ -48,8 +48,11 @@ export class ProductService {
       if(product.id === this.products[i].id)
       {
         this.products[i] = product;
+        return;
       }
     }
+
+    this.products.push(product);
    }
    
 }

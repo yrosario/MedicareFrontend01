@@ -23,7 +23,8 @@ const routes: Routes = [
   {path: 'admin/manage-users', component:ManageUserComponent},
   {path: 'admin/manage-users/edit-user/:id', component:EditUserComponent},
   {path: 'admin/manage-products', component:ManageProductComponent},
-  {path: 'admin/manage-products/edit-product/:id', component:EditProductComponent}
+  {path: 'admin/manage-products/edit-product/:id', component:EditProductComponent},
+  {path: 'admin/manage-products/edit-product', component:EditProductComponent}
 
 ];
 
