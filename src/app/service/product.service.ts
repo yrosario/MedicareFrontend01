@@ -18,9 +18,13 @@ export class ProductService {
     return this.httpClient.get<[ProductEntity]>(API_URL + PRODUCT);
   }
 
+  getProductById(id:number){
+    return this.httpClient.get<ProductEntity>(API_URL+PRODUCT+"/" +id);
+  }
+
    deleteProductById(id:number){
     for(let i = 0; i < this.products.length; i++){
-      if(id === this.products[i].id){
+      if(id === this.products[i].pid){
         this.products.splice(i,1);
         console.log(this.products);
         break;
@@ -30,7 +34,7 @@ export class ProductService {
 
    findProductById(id){
     for(let product of this.products){
-      if(product.id === id){
+      if(product.pid === id){
         return product;     
        }
     }
@@ -40,7 +44,7 @@ export class ProductService {
 
    save(product){
     for(let i = 0; i < this.products.length; i++){
-      if(product.id === this.products[i].id)
+      if(product.id === this.products[i].pid)
       {
         this.products[i] = product;
         return;

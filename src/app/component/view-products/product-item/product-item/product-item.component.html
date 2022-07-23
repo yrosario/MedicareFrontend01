@@ -1,7 +1,8 @@
 <div class="product-item" id="product-item" *ngIf="product != null">
-    <div class="prod-img" id="prod-img"><a [routerLink]="['/shop/product',product.id]"><img [src]="product.imgUrl" [alt]="product.name"> </a></div>
+    <div class="prod-img" id="prod-img"><a [routerLink]="['/shop/product',product.pid]"><img [src]="product.imgUrl" [alt]="product.name"> </a></div>
+    <div>id {{product.pid}}</div>
     <div class="prod-title" id="prod-title">{{ product.name }}</div>
-    <div class="prod-price" id="prod-price">{{ product.price }}</div>
+    <div class="prod-price" id="prod-price">{{ product.price | currency}}</div>
     <button class="prod-cart-btn" id="prod-cart-btn" (click)="addToCart()"> Add </button>
     <button class="prod-buy-btbn" id="product-buy-btn" (click)="goToCart()">Buy</button>
 </div>

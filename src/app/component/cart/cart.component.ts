@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
         name:product.name,
         qty:1,
         price:product.price,
-        productId:product.id,
+        productId:product.pid,
         category:product.category.name,
         id:this.cart.products.length
 

@@ -12,8 +12,8 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class EditProductComponent implements OnInit {
 
-  product:{id:number,name:string,category:CategoryEntity,qty:number,price:number, imgUrl:string}=
-          {id:0, name:"name",category:null,qty:-1,price:-1,imgUrl:""};
+  product:{pid:number,name:string,category:CategoryEntity,qty:number,price:number, imgUrl:string}=
+          {pid:0, name:"name",category:null,qty:-1,price:-1,imgUrl:""};
   categories = [];
 
   constructor(private productService:ProductService, private categoryService:CategoryService, private activatedRoute:ActivatedRoute) { }
@@ -40,7 +40,7 @@ export class EditProductComponent implements OnInit {
     this.product.price = value.price;
     this.product.qty = value.qty;
 
-    if(this.product.id === 0){
+    if(this.product.pid === 0){
       //this.product.id = this.productService.getProducts().length;
     }
     this.productService.save(this.product);

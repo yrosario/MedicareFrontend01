@@ -1,16 +1,16 @@
 import { CategoryEntity } from "../category/category-entity";
 
 export class ProductEntity {
-    id:number;
+    pid:number;
     name:string;
     category:CategoryEntity;
     price:number;
     qty:number;
     imgUrl:string;
 
-    constructor(id:number, name:string, category:CategoryEntity, price:number, qty:number,imgUrl){
+    constructor(pid:number, name:string, category:CategoryEntity, price:number, qty:number,imgUrl){
 
-        this.id = id;
+        this.pid = pid;
         this.name = name;
         this.category = category;
         this.price = price;

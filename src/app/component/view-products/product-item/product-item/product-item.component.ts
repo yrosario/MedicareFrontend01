@@ -23,10 +23,12 @@ export class ProductItemComponent implements OnInit {
   
    this.getProducts();
 
-   let paramValue = this.activedRoute.snapshot.paramMap.get("id");
+   let paramValue = +this.activedRoute.snapshot.paramMap.get("id");
 
-    if(paramValue !== null){
-      this.product = this.findProduct(paramValue);
+
+   console.log(paramValue);
+    if(paramValue){
+      this.getProductById(paramValue);
     }
   }
 
@@ -38,16 +40,12 @@ export class ProductItemComponent implements OnInit {
     )
   }
 
-  private findProduct(paramValue){
-
-    for(let product of this.products){
-      console.log(paramValue == product.id);
-      if(product.id == paramValue){
-        return product;
+  getProductById(id:number){
+    this.productService.getProductById(id).subscribe(
+      res=>{
+        this.product = res;
       }
-    }
-
-    return null;
+    )
   }
 
   addToCart(){
