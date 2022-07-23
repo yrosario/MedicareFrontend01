@@ -29,19 +29,15 @@ export class ProductService {
     this.httpClient.delete(API_URL+PRODUCT+"/"+id);
   }
 
+  /* Post a new product to REST api */
   saveProduct(product:ProductEntity){
-    this.httpClient.post(`${API_URL}${PRODUCT}`,{observe: 'response', responseType: 'json'});
+    this.httpClient.post(API_URL+PRODUCT,product);
   }
 
-  //  deleteProductById(id:number){
-  //   for(let i = 0; i < this.products.length; i++){
-  //     if(id === this.products[i].pid){
-  //       this.products.splice(i,1);
-  //       console.log(this.products);
-  //       break;
-  //     }
-  //   }
-  //  }
+  /* Put a product to REST api */
+  updateProduct(product:ProductEntity){
+    this.httpClient.put(API_URL+PRODUCT,product);
+  }
 
    findProductById(id){
     for(let product of this.products){

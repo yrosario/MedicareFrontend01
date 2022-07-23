@@ -28,12 +28,12 @@ export class CategoryService {
 
   /* Post category to REST api */
   saveCategory(category:CategoryEntity){
-    this.httpClient.post(API_URL+category, {observe: 'response', responseType: 'json'});
+    this.httpClient.post(API_URL+category,category);
   }
 
   /*Put category to REST api */
   updateCategory(category:CategoryEntity){
-    this.httpClient.put(API_URL+CATEGORY, {observe: 'response', responseType: "json"});
+    this.httpClient.put(API_URL+CATEGORY,category);
   }
 
   /*Delete category base on id from REST api*/
