@@ -1,27 +1,22 @@
 import { Injectable } from '@angular/core';
 import { CategoryEntity } from '../entity/category/category-entity';
 import { ProductEntity } from '../entity/product/product-entity';
+import { HttpClient} from '@angular/common/http';
+import { API_URL, PRODUCT } from '../contants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  products = [new ProductEntity(1,"Vitamin c", new CategoryEntity(1,"vitamin"),8.88,55,"https://via.placeholder.com/150"),
-              new ProductEntity(2,"Vitamin B", new CategoryEntity(1,"vitamin"),10.99,23,"https://via.placeholder.com/150"),
-              new ProductEntity(3,"Aspirin", new CategoryEntity(2,"Pain Relief"),15.99,14,"https://via.placeholder.com/150"),
-              new ProductEntity(4,"Flu Cough Syrup", new CategoryEntity(3,"Flu/Cold Medicine"),10.99,23,"https://via.placeholder.com/150"),
-              new ProductEntity(5,"Nasal Spray", new CategoryEntity(4,"Congestion Relief"),3.45,43,"https://via.placeholder.com/150"),
-              new ProductEntity(6,"Vitamin F", new CategoryEntity(1,"vitamin"),10.55,45,"https://via.placeholder.com/150")];
+  products:[ProductEntity];
 
-  constructor() {
-
-    
+  constructor(private httpClient:HttpClient) { 
    }
 
-   getProducts(){
-      return this.products;
-   }
+  getProducts(){
+    return this.httpClient.get<[ProductEntity]>(API_URL + PRODUCT);
+  }
 
    deleteProductById(id:number){
     for(let i = 0; i < this.products.length; i++){

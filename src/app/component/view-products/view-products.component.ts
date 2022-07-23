@@ -20,7 +20,11 @@ export class ViewProductsComponent implements OnInit {
   }
 
   getProducts(){
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe(
+      res => {
+        this.products = res;
+      }
+    )
   }
 
   getCategories(){

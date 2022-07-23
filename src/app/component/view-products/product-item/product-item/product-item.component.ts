@@ -14,11 +14,15 @@ import { UserService } from 'src/app/service/user.service';
 export class ProductItemComponent implements OnInit {
 
   @Input() product:ProductEntity;
+  products:[ProductEntity];
 
   constructor(private activedRoute:ActivatedRoute, private productService:ProductService,private msg:MessengerService,
               private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
+  
+   this.getProducts();
+
    let paramValue = this.activedRoute.snapshot.paramMap.get("id");
 
     if(paramValue !== null){
@@ -26,9 +30,17 @@ export class ProductItemComponent implements OnInit {
     }
   }
 
+  getProducts(){
+    this.productService.getProducts().subscribe(
+      res => {
+        this.products = res;
+      }
+    )
+  }
+
   private findProduct(paramValue){
 
-    for(let product of this.productService.getProducts()){
+    for(let product of this.products){
       console.log(paramValue == product.id);
       if(product.id == paramValue){
         return product;

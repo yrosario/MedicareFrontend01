@@ -19,6 +19,7 @@ import { ManageUserComponent } from './component/admin/manage-user/manage-user.c
 import { EditUserComponent } from './component/admin/manage-user/edit-user/edit-user.component';
 import { ManageProductComponent } from './component/admin/manage-product/manage-product.component';
 import { EditProductComponent } from './component/admin/manage-product/edit-product/edit-product.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -44,7 +45,8 @@ import { EditProductComponent } from './component/admin/manage-product/edit-prod
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

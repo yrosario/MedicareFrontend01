@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -10,21 +11,27 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class ManageProductComponent implements OnInit {
 
-  products = [];
-  c
+  products:[ProductEntity];
+  
   constructor(private productService:ProductService, private router:Router ) { }
 
   ngOnInit(): void {
+    this.getProducts();
+  }
 
-    this.products = this.productService.getProducts();
-    
+  getProducts(){
+    this.productService.getProducts().subscribe(
+      res => {
+        this.products = res;
+      }
+    )
   }
 
   deleteProductById(id:number){
     
     this.productService.deleteProductById(id);
     console.log(this.products);
-    this.products = this.productService.getProducts()
+    this.getProducts();
   }
 
   navigateProductEdit(id?){

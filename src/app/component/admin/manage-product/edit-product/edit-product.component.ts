@@ -41,7 +41,7 @@ export class EditProductComponent implements OnInit {
     this.product.qty = value.qty;
 
     if(this.product.id === 0){
-      this.product.id = this.productService.getProducts().length;
+      //this.product.id = this.productService.getProducts().length;
     }
     this.productService.save(this.product);
 
