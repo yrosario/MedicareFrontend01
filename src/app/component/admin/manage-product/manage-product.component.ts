@@ -39,7 +39,11 @@ export class ManageProductComponent implements OnInit {
   }
 
   navigateProductEdit(id?:number){
-    this.router.navigate([`admin/manage-products/edit-product/${id}`]);
+    if(id === undefined){
+        this.router.navigate([`admin/manage-products/edit-product`]);
+    }else{
+      this.router.navigate([`admin/manage-products/edit-product/${id}`]);
+    }
   }
 
 }

@@ -23,7 +23,7 @@ export class CategoryService {
 
   /* Retrieve a specific category from REST server */
   getCategoryById(id:number){
-    return this.httpClient.get<CategoryEntity>(API_URL+CATEGORY+id);
+    return this.httpClient.get<CategoryEntity>(API_URL+CATEGORY+`/${id}`);
   }
 
   /* Post category to REST api */

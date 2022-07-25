@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CategoryEntity } from '../entity/category/category-entity';
 import { ProductEntity } from '../entity/product/product-entity';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { API_URL, PRODUCT } from '../contants';
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,12 @@ import { API_URL, PRODUCT } from '../contants';
 export class ProductService {
 
   products:[ProductEntity];
+  options:{};
 
   constructor(private httpClient:HttpClient) { 
+    this.options = { 
+        headers: new HttpHeaders({'Content-Type': 'application/json'})
+      };
    }
 
    /*Retrieves all products from http://localhost:8080/api/v1/product */
@@ -31,15 +36,17 @@ export class ProductService {
 
   /* Post a new product to REST api */
   saveProduct(product:ProductEntity){
-    return this.httpClient.post(API_URL+PRODUCT,product);
+    return this.httpClient.post(API_URL+`/${PRODUCT}`,product);
   }
 
   /* Put a product to REST api */
   updateProduct(product:ProductEntity){
-    this.httpClient.put(API_URL+PRODUCT,product);
+    let test = { 
+      headers: new HttpHeaders({'Content-Type': 'application/json'})};
+    return this.httpClient.put(API_URL +`/${PRODUCT}`,product);
   }
 
-   findProductById(id){
+   findProductById(id:number){
     for(let product of this.products){
       if(product.pid === id){
         return product;     

@@ -17,8 +17,8 @@
 
         <!-- Prod Category -->
         <label for="prod-category" class="prod-category-lb" id="prod-category-lb">Category</label>
-        <select name="category" id="category-select" class="category-select" [(ngModel)]="product.category" required>
-            <option *ngFor="let category of categories" value="category.name">{{category.name}}</option>
+        <select name="category" id="category-select" class="category-select" [(ngModel)]="categoryId" required>
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
         </select>
         <br>
 

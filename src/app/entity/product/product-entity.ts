@@ -8,7 +8,7 @@ export class ProductEntity {
     qty:number;
     imgUrl:string;
 
-    constructor(pid:number, name:string, category:CategoryEntity, price:number, qty:number,imgUrl){
+    constructor(pid?:number, name?:string, category?:CategoryEntity, price?:number, qty?:number,imgUrl?:string){
 
         this.pid = pid;
         this.name = name;

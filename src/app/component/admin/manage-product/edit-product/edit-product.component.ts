@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { CategoryEntity } from 'src/app/entity/category/category-entity';
+import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -12,11 +13,12 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class EditProductComponent implements OnInit {
 
-  product:{pid:number,name:string,category:CategoryEntity,qty:number,price:number, imgUrl:string}=
-          {pid:0, name:"name",category:null,qty:-1,price:-1,imgUrl:""};
-  categories:CategoryEntity[];
+  product:ProductEntity = new ProductEntity();
+  categoryId:number;
+  categories:CategoryEntity[] = [];
 
-  constructor(private productService:ProductService, private categoryService:CategoryService, private activatedRoute:ActivatedRoute) { }
+  constructor(private productService:ProductService, private categoryService:CategoryService, private activatedRoute:ActivatedRoute) { 
+  }
 
   ngOnInit(): void {
 
@@ -24,11 +26,21 @@ export class EditProductComponent implements OnInit {
 
     if(id){
         console.log("ID: "+ id);
-        this.product = this.productService.findProductById(id);
+        this.getProductById(id);
         
     }
 
-    this.categoryService.getCategories();
+    this.getCategories();
+  }
+
+  /* Get product base on id from rest api */
+  getProductById(id:number){
+    this.productService.getProductById(id).subscribe(
+      res =>{
+        this.product = res;
+      }
+    );
+
   }
 
   /*Retrieve all categories from server */
@@ -40,19 +52,67 @@ export class EditProductComponent implements OnInit {
     );
   }
 
+  findCategoryById(id:number){
+    for(let category of this.categories){
+       if(id == category.id){
+        return category;
+       }
+    }
+
+    return null;
+  }
+
+  /*Add new product to server*/
+  saveProduct(product:ProductEntity){
+    this.productService.saveProduct(product).subscribe(
+      res =>{
+        console.log("Post product response", res);
+      },
+      error =>{
+        console.log("Post error " + error);
+      }
+    )
+  }
+
+  /*Update product on sever*/
+  updateProduct(product:ProductEntity){
+    this.productService.updateProduct(product).subscribe(
+      res => {
+        console.log("Update Product " + JSON.stringify(res));
+      },
+      error => {
+        console.log("Error Update Product " + JSON.stringify(error));
+      }
+    )
+  }
+
   editProduct(form:NgForm){
-    
-    const value = form.value;
+    console.log(`After code test ${JSON.stringify(this.product)}`);
+
+    let value = form.value;
 
     this.product.name = value.name;
-    this.product.category = value.category;
     this.product.price = value.price;
-    this.product.qty = value.qty;
+    
+    let category = this.findCategoryById(this.categoryId);
+    this.product.category = category;
 
-    if(this.product.pid === 0){
-      //this.product.id = this.productService.getProducts().length;
+    this.product.imgUrl = "http://img.com";
+    
+    if(this.product.hasOwnProperty('pid')){
+      console.log("has property ID");
+      this.updateProduct(this.product);
+    }else{
+      console.log("Doesn't have property ID");
+      this.saveProduct(this.product);
     }
-    this.productService.save(this.product);
+      
+    console.log(`After code test ${JSON.stringify(this.product)}`);
+
+    // if(this.product.pid === 0){
+    //   //this.product.id = this.productService.getProducts().length;
+    // }
+    // this.productService.saveProduct(this.product);
 
   }
 
