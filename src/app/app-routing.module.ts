@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './component/admin/admin.component';
 import { EditProductComponent } from './component/admin/manage-product/edit-product/edit-product.component';
 import { ManageProductComponent } from './component/admin/manage-product/manage-product.component';
-import { EditUserComponent } from './component/admin/manage-user/edit-user/edit-user.component';
-import { ManageUserComponent } from './component/admin/manage-user/manage-user.component';
 import { BillSummaryComponent } from './component/cart/bill-summary/bill-summary.component';
 import { CartComponent } from './component/cart/cart.component';
 import { LoginComponent } from './component/login/login.component';
@@ -20,9 +18,7 @@ const routes: Routes = [
   {path: 'shop/product/:id', component: ProductItemComponent},
   {path: 'cart', component: CartComponent},
   {path: 'cart/bill-summary', component: BillSummaryComponent},
-  {path: 'admin', component:AdminComponent},
-  {path: 'admin/manage-users', component:ManageUserComponent},
-  {path: 'admin/manage-users/edit-user/:id', component:EditUserComponent},
+  {path: 'admin', component: ManageProductComponent},
   {path: 'admin/manage-products', component:ManageProductComponent},
   {path: 'admin/manage-products/edit-product', component:EditProductComponent},
   {path: 'admin/manage-products/edit-product/:id', component:EditProductComponent},
