@@ -13,7 +13,7 @@ export class ProductService {
   products:[ProductEntity];
   options:{};
 
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient:  HttpClient) { 
     this.options = { 
         headers: new HttpHeaders({'Content-Type': 'application/json'})
       };
@@ -36,7 +36,10 @@ export class ProductService {
 
   /* Post a new product to REST api */
   saveProduct(product:ProductEntity){
-    return this.httpClient.post(API_URL+`/${PRODUCT}`,product);
+    let test = { 
+      headers: new HttpHeaders({'Content-Type': 'application/json'})};
+
+    return this.httpClient.post(API_URL+`/${PRODUCT}`,product,test);
   }
 
   /* Put a product to REST api */

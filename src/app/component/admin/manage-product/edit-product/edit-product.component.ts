@@ -16,6 +16,7 @@ export class EditProductComponent implements OnInit {
   product:ProductEntity = new ProductEntity();
   categoryId:number;
   categories:CategoryEntity[] = [];
+  selectedFile: File = null;
 
   constructor(private productService:ProductService, private categoryService:CategoryService, private activatedRoute:ActivatedRoute) { 
   }
@@ -67,9 +68,6 @@ export class EditProductComponent implements OnInit {
     this.productService.saveProduct(product).subscribe(
       res =>{
         console.log("Post product response", res);
-      },
-      error =>{
-        console.log("Post error " + error);
       }
     )
   }
@@ -79,9 +77,6 @@ export class EditProductComponent implements OnInit {
     this.productService.updateProduct(product).subscribe(
       res => {
         console.log("Update Product " + JSON.stringify(res));
-      },
-      error => {
-        console.log("Error Update Product " + JSON.stringify(error));
       }
     )
   }
@@ -98,12 +93,11 @@ export class EditProductComponent implements OnInit {
     this.product.category = category;
 
     this.product.imgUrl = "http://img.com";
-    
-    if(this.product.hasOwnProperty('pid')){
-      console.log("has property ID");
+    if(this.product.pid !== undefined){
+      console.log(this.product.pid + " has property ID");
       this.updateProduct(this.product);
     }else{
-      console.log("Doesn't have property ID");
+      console.log("Doesn't have property ID" + JSON.stringify(this.product));
       this.saveProduct(this.product);
     }
       
@@ -114,6 +108,10 @@ export class EditProductComponent implements OnInit {
     // }
     // this.productService.saveProduct(this.product);
 
+  }
+
+  onFileSelected(event){
+    this.selectedFile = event.target.file[0];
   }
 
 }

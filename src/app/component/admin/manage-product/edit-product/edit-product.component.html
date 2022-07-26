@@ -33,6 +33,10 @@
         <input name="qty" class="prod-qty-input" id="prod-qty-input" [ngModel]="product.qty" required>
         <br>
 
+        <!-- File upload -->
+        <label for="file">Upload Image</label>
+        <input type="file" class="image-upload" id="image-upload" (change)="onFileSelected($event)">
+
         <!-- Submit button -->
         <button class="prod-submit-btn" id="prod-submit-btn">Update</button>
 
