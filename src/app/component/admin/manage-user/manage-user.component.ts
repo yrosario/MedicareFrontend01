@@ -10,21 +10,38 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class ManageUserComponent implements OnInit {
 
-  users = [];
+  users:UserEntity[] = [];
 
   constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
-    this.users = this.userService.getUsers();
+    this.getUsers();
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe(
+      res =>{
+        this.users = res;
+      }
+    )
+  }
+
+  deleteUserById(id:number){
+    this.userService.deleteUserById(id).subscribe(
+      res =>{
+        this.getUsers();
+      }
+    );
   }
 
   removeUser(id:number){
     this.userService.removeUser(id);
-    this.users = this.userService.getUsers();
+    this.userService.getUsers();
   }
 
   navigateEditUser(id:number){
-    this.router.navigate([`/admin/manage-users/edit-user/${id}`]);
+       this.router.navigate([`/admin/manage-users/edit-user/${id}`]);
+
   }
 
 

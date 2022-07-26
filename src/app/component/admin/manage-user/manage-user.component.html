@@ -13,13 +13,13 @@
                <th>Delete</th>
             </tr>
             <tr *ngFor="let user of users">
-                <td>{{user.id}}</td>
+                <td>{{user.uid}}</td>
                 <td>{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.role}}</td>
-                <td><button (click)="navigateEditUser(user.id)">edit</button></td>
-                <td><button (click)="removeUser(user.id)">delete</button></td>
+                <td>{{user.role.name}}</td>
+                <td><button (click)="navigateEditUser(user.uid)">edit</button></td>
+                <td><button (click)="deleteUserById(user.uid)">delete</button></td>
             </tr>
         
         </table>
