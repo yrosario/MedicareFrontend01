@@ -3,8 +3,12 @@ import { CategoryEntity } from "../category/category-entity";
 export class ProductEntity {
     pid:number;
     name:string;
-    category:CategoryEntity;
+    brand:string;
     price:number;
+    active:boolean;
+    numberOfViews:number;
+    imageBlob:Blob;
+    category:CategoryEntity;
     qty:number;
     imgUrl:string;
 

@@ -4,6 +4,7 @@ import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { CategoryEntity } from 'src/app/entity/category/category-entity';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { CategoryService } from 'src/app/service/category.service';
+import { ImageService } from 'src/app/service/image.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -17,8 +18,10 @@ export class EditProductComponent implements OnInit {
   categoryId:number;
   categories:CategoryEntity[] = [];
   selectedFile: File = null;
+  userId:number = null;
 
-  constructor(private productService:ProductService, private categoryService:CategoryService, private activatedRoute:ActivatedRoute) { 
+  constructor(private productService:ProductService, private categoryService:CategoryService, 
+                                     private activatedRoute:ActivatedRoute, private imageService:ImageService ) { 
   }
 
   ngOnInit(): void {
@@ -66,8 +69,10 @@ export class EditProductComponent implements OnInit {
   /*Add new product to server*/
   saveProduct(product:ProductEntity){
     this.productService.saveProduct(product).subscribe(
-      res =>{
+      (res:ProductEntity) =>{
         console.log("Post product response", res);
+        this.product = res;
+        this.saveImage(res.pid,this.selectedFile);
       }
     )
   }
@@ -75,43 +80,50 @@ export class EditProductComponent implements OnInit {
   /*Update product on sever*/
   updateProduct(product:ProductEntity){
     this.productService.updateProduct(product).subscribe(
-      res => {
+      (res:ProductEntity) => {
         console.log("Update Product " + JSON.stringify(res));
+        this.saveImage(res.pid,this.selectedFile);
       }
     )
   }
 
-  editProduct(form:NgForm){
-    console.log(`After code test ${JSON.stringify(this.product)}`);
+  /*Save image to serve*/
+  saveImage(id:number,file:File){
+    
+    if(file !== null){
+      this.imageService.saveImage(id, this.selectedFile).subscribe(
+        res =>{
+          console.log(res);
+        }
+      );
+      }
+    
+  }
 
+  editProduct(form:NgForm){
     let value = form.value;
 
     this.product.name = value.name;
     this.product.price = value.price;
+    this.product.qty = value.qty;
     
     let category = this.findCategoryById(this.categoryId);
     this.product.category = category;
 
-    this.product.imgUrl = "http://img.com";
+    
     if(this.product.pid !== undefined){
-      console.log(this.product.pid + " has property ID");
       this.updateProduct(this.product);
     }else{
-      console.log("Doesn't have property ID" + JSON.stringify(this.product));
       this.saveProduct(this.product);
     }
       
-    console.log(`After code test ${JSON.stringify(this.product)}`);
-
-    // if(this.product.pid === 0){
-    //   //this.product.id = this.productService.getProducts().length;
-    // }
-    // this.productService.saveProduct(this.product);
 
   }
 
   onFileSelected(event){
-    this.selectedFile = event.target.file[0];
+    console.log(event);
+
+    this.selectedFile = <File>event.target.files[0];
   }
 
 }
