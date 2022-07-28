@@ -15,10 +15,20 @@ import { ProductService } from 'src/app/service/product.service';
 export class EditProductComponent implements OnInit {
 
   product:ProductEntity = new ProductEntity();
-  categoryId:number;
+  categoryId:number = 1;
   categories:CategoryEntity[] = [];
   selectedFile: File = null;
   userId:number = null;
+
+  //Product post status
+  isPostSucc = null;
+  postSuccMsg = "Product was saved successfully!";
+  postFailedMsg = "Product Failed to update!"; 
+
+   //image post status
+   isImgPostSucc = null;
+   postImgSuccMsg = "Image was saved successfully!";
+   postImgFailedMsg = "Image Failed to update!"; 
 
   constructor(private productService:ProductService, private categoryService:CategoryService, 
                                      private activatedRoute:ActivatedRoute, private imageService:ImageService ) { 
@@ -29,7 +39,6 @@ export class EditProductComponent implements OnInit {
      let id = +this.activatedRoute.snapshot.params['id'];
 
     if(id){
-        console.log("ID: "+ id);
         this.getProductById(id);
         
     }
@@ -42,6 +51,7 @@ export class EditProductComponent implements OnInit {
     this.productService.getProductById(id).subscribe(
       res =>{
         this.product = res;
+        this.categoryId = this.product.category.id;
       }
     );
 
@@ -70,9 +80,11 @@ export class EditProductComponent implements OnInit {
   saveProduct(product:ProductEntity){
     this.productService.saveProduct(product).subscribe(
       (res:ProductEntity) =>{
-        console.log("Post product response", res);
         this.product = res;
         this.saveImage(res.pid,this.selectedFile);
+        this.isPostSucc = true;
+      },error=>{
+        this.isPostSucc = false;
       }
     )
   }
@@ -81,8 +93,10 @@ export class EditProductComponent implements OnInit {
   updateProduct(product:ProductEntity){
     this.productService.updateProduct(product).subscribe(
       (res:ProductEntity) => {
-        console.log("Update Product " + JSON.stringify(res));
         this.saveImage(res.pid,this.selectedFile);
+        this.isPostSucc = true;
+      },error=>{
+        this.isPostSucc = false;
       }
     )
   }
@@ -93,7 +107,10 @@ export class EditProductComponent implements OnInit {
     if(file !== null){
       this.imageService.saveImage(id, this.selectedFile).subscribe(
         res =>{
-          console.log(res);
+          this.isImgPostSucc = true;
+        },
+        error =>{
+          this.isImgPostSucc = false;
         }
       );
       }

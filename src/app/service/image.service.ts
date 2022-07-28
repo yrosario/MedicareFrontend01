@@ -17,7 +17,7 @@ export class ImageService {
   saveImage(id:number, image: File){
     let formData: FormData = new FormData();
     formData.append('file', image, image.name);
-    return this.http.post<void>(`${API_URL}/${PRODUCT}/${id}/${UPLOAD}`,formData);
+    return this.http.post(`${API_URL}/${PRODUCT}/${id}/${UPLOAD}`,formData,{observe: "response", responseType:"text"});
   }
 
 

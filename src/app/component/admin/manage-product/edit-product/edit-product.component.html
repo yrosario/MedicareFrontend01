@@ -4,6 +4,14 @@
     <!-- Page title -->
     <p class="edit-prod-title" id="eidt-prod-title">Edit Product</p>
 
+    <!-- Product update operation status message -->
+    <div class="update-msg-div" id="update-msg-div">
+        <p *ngIf="isPostSucc">{{postSuccMsg}} <a routerLink="/admin/manage-products">Go Product Admin Page</a></p>
+        <p *ngIf="isImgPostSucc">{{postImgSuccMsg}}</p>
+        <p *ngIf="isPostSucc === false">{{postFailedMsg}}</p>
+        <p *ngIf="isImgPostSucc === false">{{postImgFailedMsg}}</p>
+    </div>
+
     <!-- Form for product -->
     <form class="prod-form" id="prod-form" (ngSubmit)="editProduct(prodForm)" #prodForm="ngForm">
         <!-- Prod id -->
@@ -12,17 +20,17 @@
 
         <!-- Prod name -->
         <label for="prod-name" class="prod-name-lb" id="prod-name-lb">Name</label>
-        <input name="name" class="prod-name-input" id="prod-name-input" [ngModel]="product.name" required>
+        <input name="name" type="text" class="prod-name-input" id="prod-name-input"  [ngModel]="product.name" required>
         <br>
 
         <!-- Prod Brand -->
-        <label for="prod-brand" class="prod-brand-lb" id="prod-brand-lb">Name</label>
-        <input name="brand" class="prod-brand-input" id="prod-brand-input" [ngModel]="product.brand" required>
+        <label for="prod-brand" class="prod-brand-lb" id="prod-brand-lb">Brand</label>
+        <input name="brand" type="text" class="prod-brand-input" id="prod-brand-input" [ngModel]="product.brand" required>
         <br>
 
         <!-- Prod Category -->
         <label for="prod-category" class="prod-category-lb" id="prod-category-lb">Category</label>
-        <select name="category" id="category-select" class="category-select" [(ngModel)]="categoryId" required>
+        <select name="category" placeholder="Select Category" id="category-select" class="category-select" [(ngModel)]="categoryId" required>
             <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
         </select>
         <br>
@@ -30,17 +38,21 @@
 
         <!--  Prod Price -->
         <label for="price-category" class="prod-price-lb" id="prod-price-lb">Price</label>
-        <input name="price" class="prod-price-input" id="prod-price-input" [ngModel]="product.price" required>
+        <input name="price" type="number" class="prod-price-input" id="prod-price-input" min = 0 [ngModel]="product.price" required>
         <br>
 
         <!-- Prod qty -->
         <label for="prod-qty" class="prod-qty-lb" id="prod-qty-lb">Qty</label>
-        <input name="qty" class="prod-qty-input" id="prod-qty-input" [ngModel]="product.qty" required>
+        <input name="qty" type="number" class="prod-qty-input" id="prod-qty-input" min=0 [ngModel]="product.qty" required>
         <br>
 
         <!-- File upload -->
         <label for="file">Upload Image</label>
         <input type="file" class="image-upload" id="image-upload" (change)="onFileSelected($event)">
+
+        <!-- disable button -->
+        <button class="prod-submit-btn" id="prod-submit-btn" *ngIf="product.active" (click)="product.active = !product.active">Disable</button>
+        <button class="prod-submit-btn" id="prod-submit-btn" *ngIf="!product.active" (click)="product.active = !product.active">Enable</button>
 
         <!-- Submit button -->
         <button class="prod-submit-btn" id="prod-submit-btn">Update</button>

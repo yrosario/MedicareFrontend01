@@ -33,8 +33,6 @@ export class ManageProductComponent implements OnInit {
   deleteProductById(id:number){
     this.productService.deleteProductById(id).subscribe(
       res => {
-        console.log("Delete response",JSON.stringify(res));
-
         //Refresh product list
         this.getProducts();
       }
@@ -74,7 +72,6 @@ export class ManageProductComponent implements OnInit {
   findImage(id){
     for(let img of this.images){
       if(img.pid == id){
-        console.log(img);
         return img.content;
       }
     }
@@ -84,11 +81,7 @@ export class ManageProductComponent implements OnInit {
 
   disableProduct(product:ProductEntity){
     product.active = !product.active;
-    this.productService.updateProduct(product).subscribe(
-      res => {
-        console.log(res);
-      }
-    );
+    this.productService.updateProduct(product).subscribe();
   }
 
 }

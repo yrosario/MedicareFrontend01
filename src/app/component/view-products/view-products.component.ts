@@ -70,7 +70,6 @@ export class ViewProductsComponent implements OnInit {
   findImage(id){
     for(let img of this.images){
       if(img.pid == id){
-        console.log(img);
         return img.content;
       }
     }
