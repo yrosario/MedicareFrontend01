@@ -104,6 +104,7 @@ export class EditProductComponent implements OnInit {
     let value = form.value;
 
     this.product.name = value.name;
+    this.product.brand = value.brand;
     this.product.price = value.price;
     this.product.qty = value.qty;
     
