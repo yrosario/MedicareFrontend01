@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { CategoryService } from 'src/app/service/category.service';
+import { ImageService } from 'src/app/service/image.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -12,8 +13,9 @@ import { ProductService } from 'src/app/service/product.service';
 export class ManageProductComponent implements OnInit {
 
   products:ProductEntity[]= [];
+  images:{pid:string, content:any}[] = [];
   
-  constructor(private productService:ProductService, private router:Router ) { }
+  constructor(private productService:ProductService, private router:Router, private imageService:ImageService ) { }
 
   ngOnInit(): void {
     this.getProducts();
@@ -23,6 +25,7 @@ export class ManageProductComponent implements OnInit {
     this.productService.getProducts().subscribe(
       res => {
         this.products = res;
+        this.loadImages();
       }
     )
   }
@@ -44,6 +47,48 @@ export class ManageProductComponent implements OnInit {
     }else{
       this.router.navigate([`admin/manage-products/edit-product/${id}`]);
     }
+  }
+
+  loadImages(){
+    this.products.forEach(product => {
+      this.imageService.getImage(product.pid).subscribe(
+        res =>
+        {
+          this.createImageFromBlob(res, String(product.pid));
+        }
+      );
+    });
+  }
+
+  createImageFromBlob(image: Blob, pid:string){
+    let reader = new FileReader();
+    reader.addEventListener("load", () =>{
+      this.images.push({pid:pid, content:reader.result});
+    }, false);
+
+    if(image){
+      reader.readAsDataURL(image);
+    }
+  }
+
+  findImage(id){
+    for(let img of this.images){
+      if(img.pid == id){
+        console.log(img);
+        return img.content;
+      }
+    }
+
+    return null;
+  }
+
+  disableProduct(product:ProductEntity){
+    product.active = !product.active;
+    this.productService.updateProduct(product).subscribe(
+      res => {
+        console.log(res);
+      }
+    );
   }
 
 }

@@ -15,6 +15,11 @@
         <input name="name" class="prod-name-input" id="prod-name-input" [ngModel]="product.name" required>
         <br>
 
+        <!-- Prod Brand -->
+        <label for="prod-brand" class="prod-brand-lb" id="prod-brand-lb">Name</label>
+        <input name="brand" class="prod-brand-input" id="prod-brand-input" [ngModel]="product.brand" required>
+        <br>
+
         <!-- Prod Category -->
         <label for="prod-category" class="prod-category-lb" id="prod-category-lb">Category</label>
         <select name="category" id="category-select" class="category-select" [(ngModel)]="categoryId" required>

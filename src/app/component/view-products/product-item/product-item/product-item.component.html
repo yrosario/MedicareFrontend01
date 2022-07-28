@@ -1,6 +1,6 @@
 <div class="product-item" id="product-item" *ngIf="product != null">
   
-    <div class="prod-img" id="prod-img"><a [routerLink]="['/shop/product',product.pid]"><img [src]="image" [alt]="product.name"></a></div>
+    <div class="prod-img" id="prod-img"><a [routerLink]="['/shop/product',product.pid]"><img [src]="image" [alt]="product.name" style="width: 100px;"></a></div>
     <div>id {{product.pid}}</div>
     <div class="prod-title" id="prod-title">{{ product.name }}</div>
     <div class="prod-price" id="prod-price">{{ product.price | currency}}</div>
