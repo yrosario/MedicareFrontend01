@@ -3,8 +3,8 @@
 
     <!-- Search bar -->
     <div class="search-div" id="search-div">
-        <input type="text" class="search-bar" id="search-bar">
-        <button class="search-btn" id="search-btn">Search</button>
+        <input type="text" class="search-bar" id="search-bar" name="search" placeholder ="Enter Product name" #search>
+        <button class="search-btn" id="search-btn" (click)="oper='search';value=search.value; setTitle(search.value)">Search</button>
     </div>
 
     <!-- Slider -->
@@ -18,7 +18,8 @@
             <div class="category-list" id="category-list" *ngFor="let category of categories">
                 
                 <ul> 
-                    <li><a href="#">{{category.name}}</a></li>
+                    <li><button (click)="oper='category';value=category.name; setTitle(category.name)">{{category.name}}</button></li>
+                    
                 </ul>
                 
             </div>
@@ -26,10 +27,10 @@
             <!-- Product gallery -->
             <div class="product-view" id="product-view">
                 <h1 class="product-view-title" id="product-view-title">
-                    Top Selling items
+                    {{pageTitle}}
                 </h1>
         
-                <div class="flex-container product-grid" id="product-grid" *ngFor="let product of products">
+                <div class="flex-container product-grid" id="product-grid" *ngFor="let product of products | category: oper:value">
                     
                     <div class="flex-item" id="flex-item">
                         <app-product-item [product]="product" [image]="findImage(product.pid)"></app-product-item>

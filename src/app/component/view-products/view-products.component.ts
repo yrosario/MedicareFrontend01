@@ -15,6 +15,11 @@ export class ViewProductsComponent implements OnInit {
   products:ProductEntity[] = [];
   categories:CategoryEntity[] = [];
   images:{pid:string, content:any}[] = [];
+  pageTitle = "Most Viewed Items";
+
+  //values use to filter
+  oper = "";
+  value = "";
 
   constructor(private productService:ProductService, private categoryService:CategoryService,private imageService:ImageService) { }
 
@@ -72,4 +77,14 @@ export class ViewProductsComponent implements OnInit {
 
     return null;
   }
+
+  setTitle(itemName){
+    if(itemName === '')
+    {
+      this.pageTitle = "All Products";
+    }else{
+      this.pageTitle = "Search Result For " + itemName;
+    }
+  }
+
 }

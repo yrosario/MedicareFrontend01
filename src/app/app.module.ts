@@ -18,6 +18,8 @@ import { AdminComponent } from './component/admin/admin.component';
 import { ManageProductComponent } from './component/admin/manage-product/manage-product.component';
 import { EditProductComponent } from './component/admin/manage-product/edit-product/edit-product.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryPipe } from './pipe/category.pipe';
+
 
 
 
@@ -36,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     BillSummaryComponent,
     AdminComponent,
     ManageProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    CategoryPipe
   ],
   imports: [
     BrowserModule,
