@@ -13,6 +13,7 @@ export class LogoffComponent implements OnInit {
   ngOnInit(): void {
 
     sessionStorage.removeItem("loggedIn");
+    sessionStorage.removeItem("user");
 
     setTimeout(()=> {
       this.redirectPage();

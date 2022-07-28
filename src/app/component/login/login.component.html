@@ -4,6 +4,11 @@
     <!-- title -->
     <h1 class="login-title" id="login-title">Login</h1>
 
+    <!-- Invalid login -->
+    <div class="invalid-msg-div" id="invalid-msg">
+        <p *ngIf="invalidLogin">{{invalidMessage}}</p>
+    </div>
+
     <!-- Login div -->
     <div class="login-block" id="login-block">
 

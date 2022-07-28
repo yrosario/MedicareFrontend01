@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
+import { ProductEntity } from 'src/app/entity/product/product-entity';
+import { RoleEntity } from 'src/app/entity/role/role-entity';
 import { UserEntity } from 'src/app/entity/user/user-entity';
 import { UserService } from 'src/app/service/user.service';
 
@@ -13,6 +15,14 @@ export class RegisterComponent implements OnInit {
 
   user:UserEntity = new UserEntity();
 
+  //User registration success message
+  isRegister = null;
+  registerMsg = "";
+
+  //Password match message
+  isPassMatch = true;
+  passMatchMsg = "Password doesn't match";
+
   constructor(private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
@@ -21,16 +31,42 @@ export class RegisterComponent implements OnInit {
   registerUser(form: NgForm){
     const value = form.value;
 
+    let user:UserEntity = new UserEntity();
+
     console.log(`form f${form}`);
-    this.user.firstname = value.username;
-    this.user.lastname = value.lastname;
-    this.user.email = value.email;
-    this.user.password = value.password;
+    user.firstname = value.firstname;
+    user.lastname = value.lastname;
+    user.username = value.username;
+    user.email = value.email;
+    user.password = value.password;
+    user.role = new RoleEntity(1,"User");
+  
+    console.log(`${user.password} ${value.retyPassword}`)
+    if(user.password == value.retyPassword){
+        this.saveUser(user);
+        this.isPassMatch = true;
+    }else{
+      this.isPassMatch = false;
+    }
 
-    this.userService.registerUser(this.user);
+  }
 
-    console.log(this.user);
-    this.router.navigate(["login"]);
+  saveUser(user:UserEntity){
+   this.userService.saveUser(user).subscribe(
+      res =>{
+        this.user = user;
+        this.isRegister = true;
+        this.registerMsg = "User registration successful!. Redirecting to login page...";
+        setTimeout(()=> {
+          this.router.navigate(["/login"]);
+        },3000);
+        
+      },
+      error=>{
+        this.isRegister = false;
+        this.registerMsg = "The was an error with form. Review the form!";
+      }
+    )
   }
 
 

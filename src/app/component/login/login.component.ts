@@ -9,9 +9,10 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  username = "test";
-  password = "password"
+  username = "test3";
+  password = "test"
   invalidLogin = false;
+  invalidMessage = "Wrong username or password";
 
   constructor(private userService:UserService, private router:Router) { }
 
@@ -23,13 +24,19 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    if(this.userService.authenticate(this.username,this.password)){
-      sessionStorage.setItem("loggedIn", "1");
-      this.invalidLogin = false;
-      this.router.navigate(["/shop"]);
-    }else{
-      this.invalidLogin = true;
-    }
+    let userInfo = {username:this.username, password:this.password};
+
+    this.userService.login(userInfo).subscribe(
+      res =>{
+        sessionStorage.setItem("loggedIn", "1");
+        sessionStorage.setItem("user", JSON.stringify(res));
+        this.invalidLogin = false;
+       this.router.navigate(["/shop"]);
+      },
+      error => {
+        this.invalidLogin = true;
+      }
+    )
   }
 
   routeToRegister(){
