@@ -8,7 +8,7 @@
     <!-- List all products -->
     <div class="list-prod-div" id="list-prod-div">
         <button class="button add-user-btn" id="add-user-btn" (click)="navigateProductEdit()">ADD</button>
-        <input type="text" class="search-box" id="search-box" placeholder="Enter product name" (keyup.enter)="searchTerm=search.value" #search>
+        <input type="text" class="search-box" id="search-box" placeholder="Search ..." (keyup.enter)="searchTerm=search.value" #search>
         <table class="prod-table" id="prod-table">
             <thead>                 <tr class="prod-header-row">
                      <th>ID</th>
