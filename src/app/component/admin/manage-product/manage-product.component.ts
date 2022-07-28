@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
-import { CategoryService } from 'src/app/service/category.service';
 import { ImageService } from 'src/app/service/image.service';
 import { ProductService } from 'src/app/service/product.service';
+
 
 @Component({
   selector: 'app-manage-product',
@@ -14,6 +14,7 @@ export class ManageProductComponent implements OnInit {
 
   products:ProductEntity[]= [];
   images:{pid:string, content:any}[] = [];
+  searchTerm = "";
   
   constructor(private productService:ProductService, private router:Router, private imageService:ImageService ) { }
 
