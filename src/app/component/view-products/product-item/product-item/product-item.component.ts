@@ -15,14 +15,13 @@ import { UserService } from 'src/app/service/user.service';
 export class ProductItemComponent implements OnInit {
 
   @Input() product:ProductEntity;
-  products:[ProductEntity];
+  @Input() image:any = null;
 
   constructor(private activedRoute:ActivatedRoute, private productService:ProductService,private msg:MessengerService,
               private userService:UserService, private router:Router, private imageService:ImageService) { }
 
   ngOnInit(): void {
   
-   this.getProducts();
 
    let paramValue = +this.activedRoute.snapshot.paramMap.get("id");
 
@@ -31,21 +30,17 @@ export class ProductItemComponent implements OnInit {
     if(paramValue){
       this.getProductById(paramValue);
     }
+
+    
+
   }
 
-  getProducts(){
-    this.productService.getProducts().subscribe(
-      res => {
-        this.products = res;
-        
-      }
-    )
-  }
 
   getProductById(id:number){
     this.productService.getProductById(id).subscribe(
       res=>{
         this.product = res;
+        this.loadImage();
       }
     )
   }
@@ -73,9 +68,25 @@ export class ProductItemComponent implements OnInit {
     this.router.navigate(["login"]);
   }
 
- 
-  getImage(id){
-    return this.imageService.images[id];
+
+  loadImage(){
+    this.imageService.getImage(this.product.pid).subscribe(
+        res =>
+        {
+          this.createImageFromBlob(res, String(this.product.pid));
+        }
+      );
+  }
+
+  createImageFromBlob(image: Blob, pid:string){
+    let reader = new FileReader();
+    reader.addEventListener("load", () =>{
+      this.image = reader.result;
+    }, false);
+
+    if(image){
+      reader.readAsDataURL(image);
+    }
   }
 
 

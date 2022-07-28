@@ -32,9 +32,10 @@
                 <div class="flex-container product-grid" id="product-grid" *ngFor="let product of products">
                     
                     <div class="flex-item" id="flex-item">
-                        <app-product-item [product]="product"></app-product-item>
+                        <app-product-item [product]="product" [image]="findImage(product.pid)"></app-product-item>
                           
                     </div>
+
                 </div>
             </div>
     </div>

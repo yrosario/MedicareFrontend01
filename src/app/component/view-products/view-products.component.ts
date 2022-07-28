@@ -14,6 +14,7 @@ export class ViewProductsComponent implements OnInit {
 
   products:ProductEntity[] = [];
   categories:CategoryEntity[] = [];
+  images:{pid:string, content:any}[] = [];
 
   constructor(private productService:ProductService, private categoryService:CategoryService,private imageService:ImageService) { }
 
@@ -26,7 +27,7 @@ export class ViewProductsComponent implements OnInit {
     this.productService.getProducts().subscribe(
       res => {
         this.products = res;
-        this.imageService.loadImages(this.products);
+        this.loadImages();
       }
     )
   }
@@ -37,5 +38,38 @@ export class ViewProductsComponent implements OnInit {
         this.categories = res;
       }
     );
+  }
+
+  loadImages(){
+    this.products.forEach(product => {
+      this.imageService.getImage(product.pid).subscribe(
+        res =>
+        {
+          this.createImageFromBlob(res, String(product.pid));
+        }
+      );
+    });
+  }
+
+  createImageFromBlob(image: Blob, pid:string){
+    let reader = new FileReader();
+    reader.addEventListener("load", () =>{
+      this.images.push({pid:pid, content:reader.result});
+    }, false);
+
+    if(image){
+      reader.readAsDataURL(image);
+    }
+  }
+
+  findImage(id){
+    for(let img of this.images){
+      if(img.pid == id){
+        console.log(img);
+        return img.content;
+      }
+    }
+
+    return null;
   }
 }

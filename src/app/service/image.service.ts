@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_URL, UPLOAD, PRODUCT, USER } from '../contants';
-import { ProductEntity } from '../entity/product/product-entity';
+import { Observable } from 'rxjs';
+import { API_URL, UPLOAD, PRODUCT, USER, IMAGE } from '../contants';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
 
-  images:{pid:string, content:any}[] = [];
+  
 
   constructor(private http:HttpClient) { }
 
@@ -20,20 +21,7 @@ export class ImageService {
   }
 
 
-  createImageFromBlob(image: Blob, pid:string){
-    let reader = new FileReader();
-    reader.addEventListener("load", () =>{
-      this.images.push({pid:pid, content:reader.result});
-    }, false);
-
-    if(image){
-      reader.readAsDataURL(image);
-    }
-  }
-
-  loadImages(product:ProductEntity[]){
-    product.forEach(item => {
-      this.createImageFromBlob(item.imageBlob, String(item.pid));
-    });
+  getImage(id:number):Observable<Blob>{
+    return this.http.get(`${API_URL}/${PRODUCT}/${id}/${IMAGE}`, {responseType: 'blob'});
   }
 }
