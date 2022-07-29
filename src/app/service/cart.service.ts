@@ -59,4 +59,14 @@ export class CartService {
   getLocalCart():CartEntity[]{
     return this.cart;
   }
+
+  isInCart(pid:number){
+    for(let item of this.cart){
+      if(item.product.pid == pid){
+        return item;
+      }
+    }
+    return undefined;
+
+  }
 }

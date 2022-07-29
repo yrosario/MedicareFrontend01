@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     let user:UserEntity = JSON.parse(sessionStorage.getItem("user"));
-    console.log(user);
+
     if(user.uid > 0){
        this.getCart(user.uid);
        this.userId = user.uid;
@@ -31,18 +31,20 @@ export class CartComponent implements OnInit {
 
 
     this.msg.getMsg().subscribe((product:ProductEntity) => {
-      // this.cart.products.push({
-      //   name:product.name,
-      //   qty:1,
-      //   price:product.price,
-      //   productId:product.pid,
-      //   category:product.category.name,
-      //   //id:this.cart.products.length
+      
+      let cartItem = this.isInCart(product.pid);
+      console.log("Inside Cart Item " + JSON.stringify(cartItem));
+      if(cartItem){
+        cartItem.quantity++;
+        this.updateToCart(this.userId,cartItem);
+      }else{
+        this.addToCart(this.userId,product.pid);
+      }
 
-      // })
+      });
 
       
-    })
+  
     this.sumTotal();
     this.cartService.setCart(this.cart);
 
@@ -94,7 +96,7 @@ export class CartComponent implements OnInit {
       res => {
         this.cart = res;
         this.sumTotal();
-        console.log(res);
+        this.cartService.setCart(res);
       }
     );
   }
@@ -113,6 +115,7 @@ export class CartComponent implements OnInit {
     this.cartService.updateToCart(uid,cartItem).subscribe(
       res =>{
         this.sumTotal();
+        this.getCart(uid);
       }
     )
   }
@@ -124,6 +127,17 @@ export class CartComponent implements OnInit {
         this.sumTotal();
       }
     );
+  }
+
+  //Check if product is in the cart
+  isInCart(pid:number){
+    for(let item of this.cart){
+      if(item.product.pid == pid){
+        return item;
+      }
+    }
+    return undefined;
+
   }
 
 }
