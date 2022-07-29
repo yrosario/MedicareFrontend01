@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit {
     user.password = value.password;
     user.role = new RoleEntity(1,"User");
   
-    console.log(`${user.password} ${value.retyPassword}`)
     if(user.password == value.retyPassword){
         this.saveUser(user);
         this.isPassMatch = true;
@@ -51,7 +50,7 @@ export class RegisterComponent implements OnInit {
   }
 
   saveUser(user:UserEntity){
-   this.userService.saveUser(user).subscribe(
+    this.userService.saveUser(user).subscribe(
       res =>{
         this.user = user;
         this.isRegister = true;
