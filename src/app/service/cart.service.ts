@@ -1,11 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { R3SelectorScopeMode } from '@angular/compiler';
+
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { API_URL, CART, CART_ITEM, USER } from '../contants';
 import { CartEntity } from '../entity/cart/cart-entity';
-import { CategoryEntity } from '../entity/category/category-entity';
-import { ProductEntity } from '../entity/product/product-entity';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +44,7 @@ export class CartService {
 
   //Remove item from cart on the server
   removeFromCart(uid:number, iid:number){
-    return this.http.delete(`${API_URL}/${CART}/${USER}/${uid}/${CART_ITEM}/${iid}`);
+    return this.http.delete(`${API_URL}/${CART}/${USER}/${uid}/${CART_ITEM}/${iid}`,{observe: "response", responseType:"text"});
   }
 
 

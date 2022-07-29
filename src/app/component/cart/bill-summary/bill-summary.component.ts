@@ -11,7 +11,7 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class BillSummaryComponent implements OnInit {
 
-  cart:CartEntity[] = [];
+  cart:any[] = [];
   total = 0;
   userId = null;
 
@@ -21,34 +21,73 @@ export class BillSummaryComponent implements OnInit {
   
     let user:UserEntity = JSON.parse(sessionStorage.getItem("user"));
     if(user.uid){
-       this.cartService.getCart(user.uid);
+       this.getCart(user.uid);
        this.userId = user.uid;
     }
 
-    let newCart = new CartEntity();
-    newCart.product = [];
-    this.cartService.setCart(newCart);
-    this.addTotal();
+    this.sumTotal();
     
-  
+
+    
   }
 
-  addTotal(){
-    // this.total = 0;
-    // let products = this.cart.products;
+  sumTotal(){
+    this.total = 0;
+    let cart = this.cart;
 
-    // for(let item of products){
-    //   this.total += item.qty + item.price;
-    // }
+    for(let item of cart){
+      this.total += item.quantity + item.product.price;
+    }
   }
+
+
 
     //Get user carts from server
-    getCart(id:number){
-      this.cartService.getCart(id).subscribe(
-        res => {
-          this.cart = res;
-        }
-      );
-    }
+  getCart(id:number){
+    this.cartService.getCart(id).subscribe(
+      res => {
+        this.cart = res;
+        this.cartService.setCart(res);
+        this.removeAllItemsFromCart();
+      }
+    );
+  }
+
+  //Add to cart on server
+  addToCart(uid:number,pid:number){
+    this.cartService.addToCart(uid,pid).subscribe(
+      res =>{
+        this.sumTotal();
+      }
+    )
+  }
+
+  //update item cart to the server
+  updateToCart(uid:number, cartItem:CartEntity){
+    this.cartService.updateToCart(uid,cartItem).subscribe(
+      res =>{
+        this.sumTotal();
+        this.getCart(uid);
+      }
+    )
+  }
+
+  //Delete item on the cart on the server
+  removeFromCart(uid:number, iid:number){
+    this.cartService.removeFromCart(uid,iid).subscribe(
+      res=>{
+        this.sumTotal();
+      }
+    );
+  }
+
+  //Remove all items from cart
+  removeAllItemsFromCart(){
+    this.cart.forEach(
+      item=>{
+        this.removeFromCart(this.userId,item.id);
+      }
+    );
+  }
 
 }
