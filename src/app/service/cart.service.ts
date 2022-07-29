@@ -1,4 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { R3SelectorScopeMode } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
+import { API_URL, CART, CART_ITEM, USER } from '../contants';
 import { CartEntity } from '../entity/cart/cart-entity';
 import { CategoryEntity } from '../entity/category/category-entity';
 import { ProductEntity } from '../entity/product/product-entity';
@@ -8,25 +12,51 @@ import { ProductEntity } from '../entity/product/product-entity';
 })
 export class CartService {
 
-  cart:CartEntity  = new CartEntity();
+  cart:any[]  = [];
   total = 0;
 
   
-  constructor() { 
-    this.cart.id = 1;
-    let category = new CategoryEntity(1,"Pain Relief");
-    this.cart.products =[{id:1, productId:1,category:"Pain Relief",name:"Aspirin",price:8.44, qty:3},
-    {id:2, productId:3,category:"Nasal Congestion",name:"Nasal Spray",price:8.44, qty:3},
-    {id:3, productId:4,category:"Flu/Cold",name:"Tera Fly",price:7.44, qty:1},
-    {id:4, productId:2,category:"Vitamin",name:"Vitamin C",price:9.44, qty:2},
-    {id:5, productId:2,category:"Vitamin",name:"Vitamin B",price:10.44, qty:5}];
+  constructor(private http:HttpClient) { 
   }
 
-  getCart(){
-    return this.cart;
+  // Get cart from server
+  getCart(id:number){
+    return this.http.get<CartEntity[]>(`${API_URL}/${CART}/${USER}/${id}`)
+    .pipe(
+      map(
+        res=>{
+          this.cart = res;
+          return res;
+        }
+      )
+    );
   }
+
+
+  //Post item to cart on server
+  addToCart(id:number, pid:number){
+    let bodyParam = {productId:pid};
+    return this.http.post(`${API_URL}/${CART}/${USER}/${id}`,bodyParam);
+  }
+
+  //Update cart item on server
+  updateToCart(uid:number,cartItem:CartEntity){
+    return this.http.put(`${API_URL}/${CART}/${USER}/${uid}`,cartItem);
+  }
+
+  //Remove item from cart on the server
+  removeFromCart(uid:number, iid:number){
+    return this.http.delete(`${API_URL}/${CART}/${USER}/${uid}/${CART_ITEM}/${iid}`);
+  }
+
+
+  
 
   setCart(cart){
     this.cart = cart;
+  }
+
+  getLocalCart():CartEntity[]{
+    return this.cart;
   }
 }

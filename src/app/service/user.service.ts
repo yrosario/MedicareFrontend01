@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_URL, LOGIN, USER } from '../contants';
-import { RoleEntity } from '../entity/role/role-entity';
 import { UserEntity } from '../entity/user/user-entity';
 
 @Injectable({

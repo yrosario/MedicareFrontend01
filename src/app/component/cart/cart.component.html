@@ -1,13 +1,13 @@
 
-<div class="empty-cart-msg" id="empty-cart-msg" *ngIf="cart.products.length === 0">
-    {{cart.products}}
+<div class="empty-cart-msg" id="empty-cart-msg" *ngIf="cart.length === 0">
     Your Cart is Empty
 </div>
 
-<div class="cart-div" id="cart-div" *ngIf="cart.products.length > 0">
+<div class="cart-div" id="cart-div" *ngIf="cart.length > 0">
 
     <table class="cart-table" id="cart-table">
         <tr>
+            <th>Item #</th>
             <th>Product ID</th>
             <th>Name</th>
             <th>Category</th>
@@ -19,15 +19,16 @@
             
         </tr>
 
-        <tr class="table-row" id="table-row" *ngFor="let item of cart.products">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.qty}}</td>
-            <td>{{item.price | currency}}</td>
-            <td>{{item.price * item.qty |currency}}</td>
-            <td><button (click)="addItem(item.id)">+</button></td>
-            <td><button (click)="removeItem(item.id)">-</button></td>
+        <tr class="table-row" id="table-row" *ngFor="let item of cart; index as i">
+            <td>{{i+1}}</td>
+            <td>{{item.product.pid}}</td>
+            <td>{{item.product.name}}</td>
+            <td>{{item.product.category.name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.product.price | currency}}</td>
+            <td>{{item.product.price * item.quantity |currency}}</td>
+            <td><button (click)="addItem(item)">+</button></td>
+            <td><button (click)="removeItem(item)">-</button></td>
         </tr>
 
         <span>Total: {{total | currency}}</span>

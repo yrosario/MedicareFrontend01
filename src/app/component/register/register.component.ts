@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
 
     let user:UserEntity = new UserEntity();
 
-    console.log(`form f${form}`);
     user.firstname = value.firstname;
     user.lastname = value.lastname;
     user.username = value.username;
