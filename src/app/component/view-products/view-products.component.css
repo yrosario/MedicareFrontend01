@@ -18,3 +18,8 @@ li {
     display: flex;
     flex-direction: column;
 }
+
+h1{
+ margin-left: 20px;   
+}
+
