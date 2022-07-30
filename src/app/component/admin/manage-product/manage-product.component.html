@@ -7,34 +7,45 @@
 
     <!-- List all products -->
     <div class="list-prod-div" id="list-prod-div">
-        <button class="button add-user-btn" id="add-user-btn" (click)="navigateProductEdit()">ADD</button>
-        <input type="text" class="search-box" id="search-box" placeholder="Search ..." (keyup.enter)="searchTerm=search.value" #search>
-        <table class="prod-table" id="prod-table">
-            <thead>                 <tr class="prod-header-row">
-                     <th>ID</th>
-                     <th> Image</th>
-                     <th>Name</th>
-                     <th>Brand</th>
-                     <th>Category</th>
-                     <th>Quantity</th>
-                     <th>Price</th>
-                     <th> Edit</th>
-                     <th> Disable</th>
-                 </tr>
+        
+
+            <!-- Search bar -->
+    <div class="search-div input-group mb-3" id="search-div">
+        <button class="button add-user-btn btn btn-primary" id="add-user-btn" (click)="navigateProductEdit()">ADD</button>
+        <input type="text" class="search-box form-control" id="search-box" placeholder="Search ..." (keyup.enter)="searchTerm=search.value" #search>
+    </div>
+        
+        <table class="prod-table table table-hover table-striped" id="prod-table">
+            <thead>                 
+                <tr class="prod-header-row">
+                    <th>ID</th>
+                    <th> Image</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th> Edit</th>
+                    <th> Disable</th>
+                </tr>
             </thead>
 
             <tbody>
                 <tr class="prod-data-row" id="prod-data-row" *ngFor = "let product of products | category:'search':searchTerm">
                     <td>{{product.pid}}</td>
-                    <td><img [src]="findImage(product.pid)" style="width: 80px;"></td>
+                    <td>
+                        <div class="img-div" id="img-div">
+                            <img [src]="findImage(product.pid)" style="width: 80px;">
+                        </div>
+                    </td>
                     <td>{{product.name}}</td>
                     <td>{{product.brand}}</td>
                     <td>{{product.category.name}}</td>
                     <td>{{product.qty}}</td>
                     <td>{{product.price | currency}}</td>
-                    <td><button class="prod-edit-btn" id="prod-edit-btn" (click)="navigateProductEdit(product.pid)">Edit</button></td>
-                    <td *ngIf="product.active"><button class="prod-delete-btn" id="prod-delete-btn" (click)="disableProduct(product)" >Disable</button></td>
-                    <td *ngIf="!product.active"><button class="prod-delete-btn" id="prod-delete-btn" (click)="disableProduct(product)">Enable</button></td>
+                    <td><button class="prod-edit-btn btn btn-primary" id="prod-edit-btn " (click)="navigateProductEdit(product.pid)">Edit</button></td>
+                    <td *ngIf="product.active"><button class="prod-delete-btn btn btn-danger" id="prod-delete-btn" (click)="disableProduct(product)" >Disable</button></td>
+                    <td *ngIf="!product.active"><button class="prod-delete-btn btn btn-success" id="prod-delete-btn" (click)="disableProduct(product)">Enable</button></td>
                 </tr>
             </tbody>
         </table>
