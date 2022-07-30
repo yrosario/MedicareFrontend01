@@ -12,6 +12,7 @@ import { ProductItemComponent } from './component/view-products/product-item/pro
 import { ViewProductsComponent } from './component/view-products/view-products.component';
 
 const routes: Routes = [
+  {path: '', component:ViewProductsComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'shop', component:ViewProductsComponent},
