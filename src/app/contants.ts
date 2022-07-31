@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8080/api/v1/"
+export const API_URL = "http://192.168.1.4/api/v1/"
 export const PRODUCT = "product"
 export const CATEGORY = "category"
 export const USER = "user"
