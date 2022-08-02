@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-between align-items-center">
             
             <div class="btn-group">
-                <button class="btn btn-primary prod-cart-btn" id="prod-cart-btn" (click)="addToCart()"> Add </button>
+                <button class="btn btn-primary prod-cart-btn" id="prod-cart-btn" (click)="addToCart()" ng-disabled="buttonClicked" > Add </button>
                 <button class="btn btn-success" id="product-buy-btn" (click)="goToCart()">Buy</button>
             </div>
             

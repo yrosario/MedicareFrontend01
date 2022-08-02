@@ -23,21 +23,11 @@ p {
     padding: 0;
 }
 
-.card:hover{
+/* .card:hover{
     background-color: rgb(219, 219, 247);
     filter:brightness(105%);
     border: 1px solid;
     padding: 10px;
     box-shadow: 5px 10px #2751b4;
-}
+} */
 
-button {
-    padding: 5px 15px;
-    font-size: 18px;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 9px #999;
-  }

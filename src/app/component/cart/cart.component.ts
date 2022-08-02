@@ -26,20 +26,16 @@ export class CartComponent implements OnInit {
       this.redirectToLogin();
     }
 
-    if(user.uid > 0){
-      this.getCart(user.uid);
-      this.userId = user.uid;
-    }
+    
+    this.getCart(user.uid);
+    this.userId = user.uid;
 
 
     this.msg.getMsg().subscribe((product:ProductEntity) => {
       
       let cartItem = this.isInCart(product.pid);
-      console.log("Inside Cart Item " + JSON.stringify(cartItem));
-      if(cartItem){
-        cartItem.quantity++;
-        this.updateToCart(this.userId,cartItem);
-      }else{
+      
+      if(!cartItem){
         this.addToCart(this.userId,product.pid);
       }
 
@@ -138,7 +134,7 @@ export class CartComponent implements OnInit {
         return item;
       }
     }
-    return undefined;
+    return false;
 
   }
 
