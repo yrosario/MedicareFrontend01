@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NumberValueAccessor } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartEntity } from 'src/app/entity/cart/cart-entity';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
@@ -23,10 +22,13 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     let user:UserEntity = JSON.parse(sessionStorage.getItem("user"));
+    if(user === null){
+      this.redirectToLogin();
+    }
 
     if(user.uid > 0){
-       this.getCart(user.uid);
-       this.userId = user.uid;
+      this.getCart(user.uid);
+      this.userId = user.uid;
     }
 
 
@@ -138,6 +140,11 @@ export class CartComponent implements OnInit {
     }
     return undefined;
 
+  }
+
+  //If user has not logged in redirect to login page
+  redirectToLogin(){
+    this.router.navigate(["/login"]);
   }
 
 }
