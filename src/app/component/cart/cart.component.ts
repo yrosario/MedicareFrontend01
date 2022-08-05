@@ -31,15 +31,15 @@ export class CartComponent implements OnInit {
     this.userId = user.uid;
 
 
-    this.msg.getMsg().subscribe((product:ProductEntity) => {
+    // this.msg.getMsg().subscribe((product:ProductEntity) => {
       
-      let cartItem = this.isInCart(product.pid);
+    //   let cartItem = this.isInCart(product.pid);
       
-      if(!cartItem){
-        this.addToCart(this.userId,product.pid);
-      }
+    //   if(!cartItem){
+    //     this.addToCart(this.userId,product.pid);
+    //   }
 
-      });
+    //   });
 
       
   
@@ -95,6 +95,21 @@ export class CartComponent implements OnInit {
         this.cart = res;
         this.sumTotal();
         this.cartService.setCart(res);
+
+        this.msg.getMsg().subscribe((product:ProductEntity) => {
+      
+          let cartItem = this.isInCart(product.pid);
+
+          console.log("Cart Item " + cartItem);
+          
+          if(!cartItem){
+            this.addToCart(this.userId,product.pid);
+          }else{
+            cartItem.quantity++;
+            this.updateToCart(this.userId,cartItem);
+          }
+    
+          });
       }
     );
   }
@@ -129,7 +144,9 @@ export class CartComponent implements OnInit {
 
   //Check if product is in the cart
   isInCart(pid:number){
+    console.log( "product ID " + pid );
     for(let item of this.cart){
+      console.log("item ID" + item.product.id + " product ID " + pid );
       if(item.product.pid == pid){
         return item;
       }

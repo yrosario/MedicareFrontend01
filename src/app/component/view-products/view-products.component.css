@@ -1,25 +1,5 @@
 
 
-.flex-container{
-    display: inline-flex;
-}
 
-.flex-item{
-    order:3;
-    padding:25pt;
-    border: 1px solid black;
-}
 
-.view-splitter{
-    display: inline-flex;
-}
-
-li {
-    display: flex;
-    flex-direction: column;
-}
-
-h1{
- margin-left: 20px;   
-}
 

@@ -48,13 +48,12 @@
         
             <h1 class="product-view-title" id="product-view-title">
                 {{pageTitle}}
-            </h1>
-
+            </h1>  
 
             <!-- Product gallery -->
             <div class="product-view" id="product-view">
         
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     <div class="col " *ngFor="let product of products | category: oper:value">
                         <app-product-item [product]="product" [image]="findImage(product.pid)"></app-product-item>
                     </div>
