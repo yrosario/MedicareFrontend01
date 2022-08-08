@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { debounce, debounceTime, delay, groupBy, mergeMap, Subject, throttleTime } from 'rxjs';
 import { CartEntity } from 'src/app/entity/cart/cart-entity';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { UserEntity } from 'src/app/entity/user/user-entity';
@@ -13,7 +14,7 @@ import { MessengerService } from 'src/app/service/shared/messenger.service';
 })
 export class CartComponent implements OnInit {
 
-  cart:any[] = [];
+  cart:CartEntity[] = [];
   total = 0;
   userId = null;
 
@@ -22,29 +23,25 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     let user:UserEntity = JSON.parse(sessionStorage.getItem("user"));
+    
+    //Redirect to login page
     if(user === null){
       this.redirectToLogin();
     }
 
-    
     this.getCart(user.uid);
     this.userId = user.uid;
 
-
-    // this.msg.getMsg().subscribe((product:ProductEntity) => {
-      
-    //   let cartItem = this.isInCart(product.pid);
-      
-    //   if(!cartItem){
-    //     this.addToCart(this.userId,product.pid);
-    //   }
-
-    //   });
-
-      
+    //Messages received from view products component
+    this.msg.getMsg().pipe(
+      delay(500)
+      ).subscribe((product:ProductEntity) => {
+      this.handleAddToCart(product, this.userId);
+      });
+    
+    this.cart = this.cartService.getLocalCart();
   
     this.sumTotal();
-    this.cartService.setCart(this.cart);
 
   }
 
@@ -53,11 +50,15 @@ export class CartComponent implements OnInit {
   }
 
   sumTotal(){
-    this.total = 0;
+    let totalPrice = 0;
+    let totalQty = 0;
+
     for(let item of this.cart){
-      console.log("Value " + item.quantity);
-      this.total += item.quantity + item.product.price;
+      totalPrice += item.quantity * item.product.price;
+      totalQty += totalQty;
     }
+
+    this.total = totalPrice;
   }
 
   //Reduce quantity or remove from cart
@@ -66,6 +67,7 @@ export class CartComponent implements OnInit {
       cartItem.quantity--;
     }else{
       this.removeFromCart(this.userId,cartItem.id);
+      location.reload();
     }
 
 
@@ -89,36 +91,39 @@ export class CartComponent implements OnInit {
 
   //Get user carts from server
   getCart(id:number){
-    console.log("GET CART");
     this.cartService.getCart(id).subscribe(
       res => {
         this.cart = res;
         this.sumTotal();
-        this.cartService.setCart(res);
-
-        this.msg.getMsg().subscribe((product:ProductEntity) => {
-      
-          let cartItem = this.isInCart(product.pid);
-
-          console.log("Cart Item " + cartItem);
-          
-          if(!cartItem){
-            this.addToCart(this.userId,product.pid);
-          }else{
-            cartItem.quantity++;
-            this.updateToCart(this.userId,cartItem);
-          }
-    
-          });
+        
       }
     );
   }
 
   //Add to cart on server
-  addToCart(uid:number,pid:number){
+  handleAddToCart(product:ProductEntity,uid:number){
+
+    let existingCartItem:CartEntity= undefined;
+
+    if(this.cart.length > 0){
+      existingCartItem = this.cart.find(item => item.product.pid === product.pid);
+    }
+    
+    let alreadyExistInCart = (existingCartItem != undefined);
+
+    if(alreadyExistInCart){
+      existingCartItem.quantity++;
+      this.updateToCart(uid, existingCartItem);
+    }else{
+      this.saveToCart(uid,product.pid);
+    }
+  }
+
+  saveToCart(uid:number,pid:number){
     this.cartService.addToCart(uid,pid).subscribe(
-      res =>{
-        this.sumTotal();
+      (res : CartEntity) =>{
+        this.cart.push(res);
+        this.getCart(uid);
       }
     )
   }
@@ -144,9 +149,7 @@ export class CartComponent implements OnInit {
 
   //Check if product is in the cart
   isInCart(pid:number){
-    console.log( "product ID " + pid );
     for(let item of this.cart){
-      console.log("item ID" + item.product.id + " product ID " + pid );
       if(item.product.pid == pid){
         return item;
       }
@@ -160,4 +163,6 @@ export class CartComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
+
 }
+

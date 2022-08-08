@@ -4,5 +4,5 @@ export class CartEntity
  {
     id:number;
     quantity:number;
-    product:ProductEntity[] = [];
+    product:ProductEntity;
 }

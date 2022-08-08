@@ -19,6 +19,7 @@ import { ManageProductComponent } from './component/admin/manage-product/manage-
 import { EditProductComponent } from './component/admin/manage-product/edit-product/edit-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryPipe } from './pipe/category.pipe';
+import { OrderByPipe } from './pipe/order-by.pipe';
 
 
 
@@ -27,6 +28,7 @@ import { CategoryPipe } from './pipe/category.pipe';
 @NgModule({
   declarations: [
     AppComponent,
+    CartComponent,
     LoginComponent,
     LogoffComponent,
     RegisterComponent,
@@ -34,12 +36,12 @@ import { CategoryPipe } from './pipe/category.pipe';
     FooterComponent,
     ViewProductsComponent,
     ProductItemComponent,
-    CartComponent,
     BillSummaryComponent,
     AdminComponent,
     ManageProductComponent,
     EditProductComponent,
-    CategoryPipe
+    CategoryPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ import { CategoryPipe } from './pipe/category.pipe';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [CartComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

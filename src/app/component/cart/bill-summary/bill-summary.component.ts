@@ -11,7 +11,7 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class BillSummaryComponent implements OnInit {
 
-  cart:any[] = [];
+  cart:CartEntity[] = [];
   total = 0;
   userId = null;
 

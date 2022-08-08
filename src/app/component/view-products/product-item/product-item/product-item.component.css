@@ -1,22 +1,22 @@
-.product-desc-id{
+/* .product-desc-id{
     display: block;
-    margin-left: auto;
-    margin-right: auto;
     width: 50%;
-}
+} */
 
-.card{
+/* .card{
     max-width: 480px;
     margin:auto;
     text-align: center;
     width: 200px;
     
-}
+} */
 
 img{
-    width: 100px;
+    width: 140px;
     height: 200px;
 }
+
+
 
 p {
     margin: 0;

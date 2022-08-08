@@ -5,6 +5,7 @@ import { ImageService } from 'src/app/service/image.service';
 import { ProductService } from 'src/app/service/product.service';
 import { MessengerService } from 'src/app/service/shared/messenger.service';
 import { UserService } from 'src/app/service/user.service';
+import { debounceTime, Observable, fromEvent } from 'rxjs';
 
 
 @Component({
@@ -16,23 +17,22 @@ export class ProductItemComponent implements OnInit {
 
   @Input() product:ProductEntity;
   @Input() image:any = null;
+  btnDisable = false;
+  addToCartBtn = document.getElementById("prod-cart-btn");
+  isDisable = false;
 
   constructor(private activedRoute:ActivatedRoute, private productService:ProductService,private msg:MessengerService,
               private userService:UserService, private router:Router, private imageService:ImageService) { }
 
   ngOnInit(): void {
   
+      let paramValue = +this.activedRoute.snapshot.paramMap.get("id");
 
-   let paramValue = +this.activedRoute.snapshot.paramMap.get("id");
-
-
-   console.log(paramValue);
     if(paramValue){
       this.getProductById(paramValue);
     }
 
-    
-
+  
   }
 
 
@@ -51,7 +51,10 @@ export class ProductItemComponent implements OnInit {
     if(!isLogin){
       this.redirectLogin();
     }else{
+
       this.msg.sendMsg(this.product);
+      this.isDisable = true;
+
     }
   }
 
@@ -88,6 +91,10 @@ export class ProductItemComponent implements OnInit {
       reader.readAsDataURL(image);
     }
   }
+
+
+ 
+
 
 
 }
