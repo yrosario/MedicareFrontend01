@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { UserEntity } from './entity/user/user-entity';
-import { CartService } from './service/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +8,9 @@ import { CartService } from './service/cart.service';
 export class AppComponent {
   title = 'MedicareFrontend';
 
-  constructor(private cartService:CartService){}
+  constructor(){}
 
   
   ngOnInit():void{
-    let user:UserEntity = JSON.parse(sessionStorage.getItem("user"));
-    
-    this.cartService.getCart(user.uid).subscribe();
   }
 }

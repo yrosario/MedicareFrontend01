@@ -30,7 +30,7 @@
                 <td>{{item.quantity}}</td>
                 <td>{{item.product.price | currency}}</td>
                 <td>{{item.product.price * item.quantity |currency}}</td>
-                <td><button class="btn btn-primary btn-cart" (click)="addItem(item)">+</button></td>
+                <td><button class="btn" (click)="addItem(item)">+</button></td>
                 <td><button class="btn btn-danger btn-cart" (click)="removeItem(item)">-</button></td>
             </tr>
         </tbody>

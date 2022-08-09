@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserEntity } from 'src/app/entity/user/user-entity';
 import { UserService } from 'src/app/service/user.service';
 
@@ -8,6 +10,8 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+
 
   constructor(private userService:UserService) { }
 
@@ -24,6 +28,17 @@ export class NavbarComponent implements OnInit {
     
     return user === null ? false : true;
       
+  }
+
+  isUserAdmin(){
+    let user:UserEntity = JSON.parse(sessionStorage.getItem('user'));
+
+    if(user === null){
+      return false;;
+    }
+
+    return user.role.name === "Admin";
+    
   }
 
 }

@@ -31,19 +31,19 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/admin">Admin</a>
+                    <a class="nav-link" routerLink="/admin" *ngIf="isUserAdmin()">Admin</a>
                 </li>
                 
                 <li class="nav-item" *ngIf="isUserLoggedIn()">
-                    <a class="nav-link" routerLink="/cart">Cart</a>
+                    <a class="nav-link"  routerLink="/cart">Cart</a>
                 </li>
 
                 <li class="nav-item" *ngIf="!isloggedIn()">
-                    <a class="nav-link" routerLink="/login" >Login</a>
+                    <a class="nav-link" id="nav-login" routerLink="/login" >Login</a>
                 </li>
 
                 <li class="nav-item" *ngIf="isloggedIn()">
-                    <a class="nav-link" routerLink="/logoff" >LogOff</a>
+                    <a class="nav-link" id="nav-logoff" routerLink="/logoff" >LogOff</a>
                 </li>
             </ul>
 

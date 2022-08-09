@@ -8,7 +8,6 @@ import { ProductEntity } from '../entity/product/product-entity';
 export class CategoryPipe implements PipeTransform {
 
   transform(products: ProductEntity[], oper:string, value:string): ProductEntity[] {
-    console.log("FROM PIPE "+ oper);
     if(oper.toLowerCase() === "search"){
       return this.searchFilter(products,value);
     }else if(oper.toLocaleLowerCase() == "category"){ 

@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
 
     //Messages received from view products component
     this.msg.getMsg().pipe(
-      delay(500)
+      throttleTime(1000)
       ).subscribe((product:ProductEntity) => {
       this.handleAddToCart(product, this.userId);
       });
