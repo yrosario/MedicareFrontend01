@@ -24,8 +24,8 @@
 
             <!-- Registration failed message -->
             <div class="reg-msg-div alert alert-danger" id="reg-msg-div" *ngIf="isRegister === false || !isPassMatch">
-                <p *ngIf="isRegister == false">{{registerMsg}}</p>
-                <p *ngIf="!isPassMatch">{{passMatchMsg}}</p>
+                <p id="badFormInputMsg" *ngIf="isRegister == false">{{registerMsg}}</p>
+                <p id="invalidPassMsg" *ngIf="!isPassMatch">{{passMatchMsg}}</p>
             </div>
 
             

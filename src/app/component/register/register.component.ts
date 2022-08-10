@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         this.registerMsg = "User registration successful!. Redirecting to login page...";
         setTimeout(()=> {
           this.router.navigate(["/login"]);
-        },3000);
+        },5000);
         
       },
       error=>{
