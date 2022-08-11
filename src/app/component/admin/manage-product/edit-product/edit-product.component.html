@@ -22,7 +22,7 @@
         </div>
 
         <!-- Prod id -->
-        <label for="prod-id-lb" class="id-lb" id="id-lb"><strong>ID {{product.pid}} </strong> </label>
+        <label for="prod-id-lb" class="id-lb" id="id-lb"><strong id="prod-id">ID {{product.pid}} </strong> </label>
         <br>
 
         <!-- Prod name -->
@@ -58,11 +58,11 @@
         <input type="file" class="image-upload form-control form-control-lg " id="image-upload" (change)="onFileSelected($event)">
 
         <!-- disable button -->
-        <button class="prod-submit-btn btn btn-danger btn-lg mt-2" id="prod-submit-btn" *ngIf="product.active" (click)="product.active = !product.active">Disable</button>
-        <button class="prod-submit-btn btn btn-success btn-lg mt-2" id="prod-submit-btn" *ngIf="!product.active" (click)="product.active = !product.active">Enable</button>
+        <button class="prod-submit-btn btn btn-danger btn-lg mt-2" id="prod-disable-btn" *ngIf="product.active" (click)="product.active = !product.active">Disable</button>
+        <button class="prod-submit-btn btn btn-success btn-lg mt-2" id="prod-enable-btn" *ngIf="!product.active" (click)="product.active = !product.active">Enable</button>
 
         <!-- Submit button -->
-        <button class="prod-submit-btn btn btn-primary btn-lg mt-2" id="prod-submit-btn">Update</button>
+        <button class="prod-submit-btn btn btn-primary btn-lg mt-2" id="prod-submit-btn" [disabled]="!prodForm.valid">Update</button>
 
     </form>
 

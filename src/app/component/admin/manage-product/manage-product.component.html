@@ -38,14 +38,14 @@
                             <img [src]="findImage(product.pid)" style="width: 80px;">
                         </div>
                     </td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.brand}}</td>
-                    <td>{{product.category.name}}</td>
-                    <td>{{product.qty}}</td>
-                    <td>{{product.price | currency}}</td>
-                    <td><button class="prod-edit-btn btn btn-primary" id="prod-edit-btn " (click)="navigateProductEdit(product.pid)">Edit</button></td>
-                    <td *ngIf="product.active"><button class="prod-delete-btn btn btn-danger" id="prod-delete-btn" (click)="disableProduct(product)" >Disable</button></td>
-                    <td *ngIf="!product.active"><button class="prod-delete-btn btn btn-success" id="prod-delete-btn" (click)="disableProduct(product)">Enable</button></td>
+                    <td id="name">{{product.name}}</td>
+                    <td id="brand">{{product.brand}}</td>
+                    <td id="name">{{product.category.name}}</td>
+                    <td id="qty">{{product.qty}}</td>
+                    <td id="price">{{product.price | currency}}</td>
+                    <td id="edit-btn"><button class="prod-edit-btn btn btn-primary" id="prod-edit-btn" (click)="navigateProductEdit(product.pid)">Edit</button></td>
+                    <td *ngIf="product.active" id="enable-btn"><button class="prod-delete-btn btn btn-danger" id="prod-delete-btn" (click)="disableProduct(product)" >Disable</button></td>
+                    <td *ngIf="!product.active" id="disable-btn"><button class="prod-delete-btn btn btn-success" id="prod-delete-btn" (click)="disableProduct(product)">Enable</button></td>
                 </tr>
             </tbody>
         </table>

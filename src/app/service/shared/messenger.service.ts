@@ -7,13 +7,18 @@ import { ProductEntity } from 'src/app/entity/product/product-entity';
 })
 export class MessengerService {
 
-  subject = new Subject();
+  subject = new Subject<any>();
 
   constructor() { }
 
   //sendMsg will be call from product item
   sendMsg(product: ProductEntity){
     this.subject.next(product);
+    this.cleared();
+  }
+
+  cleared(){
+    this.subject.next('');
   }
 
   getMsg(){

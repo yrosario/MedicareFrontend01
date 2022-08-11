@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounce, debounceTime, delay, groupBy, mergeMap, Subject, throttleTime } from 'rxjs';
+import { debounce, debounceTime, delay, groupBy, mergeMap, Subject, Subscription, throttleTime } from 'rxjs';
 import { CartEntity } from 'src/app/entity/cart/cart-entity';
 import { ProductEntity } from 'src/app/entity/product/product-entity';
 import { UserEntity } from 'src/app/entity/user/user-entity';
@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   cart:CartEntity[] = [];
   total = 0;
   userId = null;
+  subscription:Subscription;
 
   constructor(private cartService:CartService, private msg:MessengerService,
         private router:Router) { }
@@ -33,16 +34,21 @@ export class CartComponent implements OnInit {
     this.userId = user.uid;
 
     //Messages received from view products component
-    this.msg.getMsg().pipe(
+    this.subscription = this.msg.getMsg().pipe(
       throttleTime(1000)
       ).subscribe((product:ProductEntity) => {
-      this.handleAddToCart(product, this.userId);
+          console.log(product);
+          this.handleAddToCart(product, this.userId);
       });
     
     this.cart = this.cartService.getLocalCart();
   
     this.sumTotal();
 
+  }
+
+  ngOnDestroy(){
+    //this.subscription.unsubscribe();
   }
 
   addProductToCart(product:ProductEntity){
