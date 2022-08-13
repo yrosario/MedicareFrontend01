@@ -14,7 +14,6 @@ export class MessengerService {
   //sendMsg will be call from product item
   sendMsg(product: ProductEntity){
     this.subject.next(product);
-    this.cleared();
   }
 
   cleared(){

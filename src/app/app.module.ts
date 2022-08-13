@@ -12,14 +12,15 @@ import { NavbarComponent } from './component/navigation/navbar/navbar.component'
 import { FooterComponent } from './component/navigation/footer/footer.component';
 import { ViewProductsComponent } from './component/view-products/view-products.component';
 import { ProductItemComponent } from './component/view-products/product-item/product-item/product-item.component';
-import { CartComponent } from './component/cart/cart.component';
-import { BillSummaryComponent } from './component/cart/bill-summary/bill-summary.component';
+import { CartComponent } from './module/cart/cart/cart.component';
+import { BillSummaryComponent } from './module/cart/cart/bill-summary/bill-summary.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { ManageProductComponent } from './component/admin/manage-product/manage-product.component';
 import { EditProductComponent } from './component/admin/manage-product/edit-product/edit-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryPipe } from './pipe/category.pipe';
 import { OrderByPipe } from './pipe/order-by.pipe';
+import { CartModule } from './module/cart/cart.module';
 
 
 
@@ -28,7 +29,6 @@ import { OrderByPipe } from './pipe/order-by.pipe';
 @NgModule({
   declarations: [
     AppComponent,
-    CartComponent,
     LoginComponent,
     LogoffComponent,
     RegisterComponent,
@@ -48,8 +48,9 @@ import { OrderByPipe } from './pipe/order-by.pipe';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    CartModule
   ],
-  providers: [CartComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
