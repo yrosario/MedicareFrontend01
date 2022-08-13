@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8081/api/v1/"
+export const API_URL = "http://ec2-18-206-127-74.compute-1.amazonaws.com:8081/api/v1/"
 export const PRODUCT = "product"
 export const CATEGORY = "category"
 export const USER = "user"
