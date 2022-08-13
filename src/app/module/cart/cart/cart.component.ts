@@ -73,7 +73,6 @@ export class CartComponent implements OnInit {
       cartItem.quantity--;
     }else{
       this.removeFromCart(this.userId,cartItem.id);
-      location.reload();
     }
 
 
