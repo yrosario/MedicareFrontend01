@@ -21,8 +21,8 @@ export class BillSummaryComponent implements OnInit {
   
     let user:UserEntity = JSON.parse(sessionStorage.getItem("user"));
     if(user.uid){
-       this.getCart(user.uid);
-       this.userId = user.uid;
+      this.getCart(user.uid);
+      this.userId = user.uid;
     }
 
     this.sumTotal();
@@ -36,7 +36,7 @@ export class BillSummaryComponent implements OnInit {
     let cart = this.cart;
 
     for(let item of cart){
-      this.total += item.quantity + item.product.price;
+      this.total += item.quantity * item.product.price;
     }
   }
 
