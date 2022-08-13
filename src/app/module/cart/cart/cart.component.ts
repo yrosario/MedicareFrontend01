@@ -37,7 +37,6 @@ export class CartComponent implements OnInit {
     this.subscription = this.msg.getMsg().pipe(
       throttleTime(1000)
       ).subscribe((product:ProductEntity) => {
-          console.log(product);
           this.handleAddToCart(product, this.userId);
       });
     
