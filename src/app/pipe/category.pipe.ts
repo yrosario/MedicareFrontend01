@@ -36,8 +36,19 @@ export class CategoryPipe implements PipeTransform {
       return products;
     }else{
       return products.filter(product =>{
-        return product.name.toLocaleLowerCase() === filterText.toLowerCase();
-      })
+
+        let productText = product.name.toLowerCase();
+        let searchTerms = filterText.split(" ");
+        for(let term of searchTerms){
+          let regex = new RegExp(term.toLowerCase(), 'gi');
+          
+          if(regex.test(productText))
+          {
+            return true;
+          };
+        }
+        return false;
+      });
     }
   }
 

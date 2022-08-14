@@ -3,7 +3,7 @@
 
     <!-- Search bar -->
     <div class="search-div input-group mb-3" id="search-div">
-        <input type="text" class="search-bar form-control" id="search-bar" name="search" placeholder ="Enter Product name" #search>
+        <input type="text" class="search-bar form-control" id="search-bar" name="search" placeholder ="Enter Product name" (keyup.enter)="oper='search';value=search.value; setTitle(search.value)" #search>
         <button class="search-btn btn btn-outline-primary" id="search-btn" (click)="oper='search';value=search.value; setTitle(search.value)">Search</button>
     </div>
 
